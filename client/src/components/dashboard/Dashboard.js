@@ -1,21 +1,21 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import DashboardActions from './DashboardActions'
 import Experience from './Experience'
 import Education from './Education'
 import { getCurrentProfile, deleteAccount } from '../../actions/profile'
 
-const Dashboard = ({
-  getCurrentProfile,
-  deleteAccount,
-  auth: { user },
-  profile: { profile }
-}) => {
+const Dashboard = () => {
+  const { user } = useSelector((state) => state.auth)
+  const { profile } = useSelector((state) => state.profile)
+
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    getCurrentProfile()
-  }, [getCurrentProfile])
+    dispatch(getCurrentProfile())
+  }, [dispatch])
 
   return (
     <>
@@ -54,11 +54,4 @@ Dashboard.propTypes = {
   profile: PropTypes.object.isRequired
 }
 
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-  profile: state.profile
-})
-
-export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(
-  Dashboard
-)
+export default Dashboard

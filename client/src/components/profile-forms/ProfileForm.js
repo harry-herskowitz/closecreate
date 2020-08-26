@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { createProfile, getCurrentProfile } from '../../actions/profile'
 
 const initialState = {
@@ -19,18 +19,17 @@ const initialState = {
   instagram: ''
 }
 
-const ProfileForm = ({
-  profile: { profile, loading },
-  createProfile,
-  getCurrentProfile,
-  history
-}) => {
+const ProfileForm = ({ history }) => {
   const [formData, setFormData] = useState(initialState)
 
   const [displaySocialInputs, toggleSocialInputs] = useState(false)
 
+  const { profile, loading } = useSelector((state) => state.profile)
+
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    if (!profile) getCurrentProfile()
+    if (!profile) dispatch(getCurrentProfile())
     if (!loading && profile) {
       const profileData = { ...initialState }
       for (const key in profile) {
@@ -43,7 +42,7 @@ const ProfileForm = ({
         profileData.skills = profileData.skills.join(', ')
       setFormData(profileData)
     }
-  }, [loading, getCurrentProfile, profile])
+  }, [dispatch, profile, loading])
 
   const {
     company,
@@ -248,10 +247,4 @@ ProfileForm.propTypes = {
   profile: PropTypes.object.isRequired
 }
 
-const mapStateToProps = (state) => ({
-  profile: state.profile
-})
-
-export default connect(mapStateToProps, { createProfile, getCurrentProfile })(
-  ProfileForm
-)
+export default ProfileForm

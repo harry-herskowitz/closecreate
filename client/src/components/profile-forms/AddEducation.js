@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { addEducation } from '../../actions/profile'
 
-const AddEducation = ({ addEducation, history }) => {
+const AddEducation = ({ history }) => {
+  const dispatch = useDispatch()
+
   const [formData, setFormData] = useState({
     school: '',
     degree: '',
@@ -40,7 +42,7 @@ const AddEducation = ({ addEducation, history }) => {
         className="form"
         onSubmit={(e) => {
           e.preventDefault()
-          addEducation(formData, history)
+          dispatch(addEducation(formData, history))
         }}
       >
         <div className="form-group">
@@ -121,4 +123,4 @@ AddEducation.propTypes = {
   addEducation: PropTypes.func.isRequired
 }
 
-export default connect(null, { addEducation })(AddEducation)
+export default AddEducation

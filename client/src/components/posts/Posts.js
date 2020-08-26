@@ -12,7 +12,7 @@ const Posts = () => {
 
   useEffect(() => {
     dispatch(getPosts())
-  }, [getPosts])
+  }, [dispatch])
 
   return (
     <>

@@ -1,17 +1,21 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Spinner from '../layout/Spinner'
 import PostItem from '../posts/PostItem'
 import CommentForm from '../post/CommentForm'
 import CommentItem from '../post/CommentItem'
 import { getPost } from '../../actions/post'
 
-const Post = ({ getPost, post: { post, loading }, match }) => {
+const Post = ({ match }) => {
+  const { post, loading } = useSelector((state) => state.post)
+
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    getPost(match.params.id)
-  }, [getPost, match.params.id])
+    dispatch(getPost(match.params.id))
+  }, [dispatch, match.params.id])
 
   return loading || post === null ? (
     <Spinner />
@@ -36,8 +40,4 @@ Post.propTypes = {
   post: PropTypes.object.isRequired
 }
 
-const mapStateToProps = (state) => ({
-  post: state.post
-})
-
-export default connect(mapStateToProps, { getPost })(Post)
+export default Post

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Spinner from '../layout/Spinner'
 import ProfileTop from './ProfileTop'
 import ProfileAbout from './ProfileAbout'
@@ -10,10 +10,15 @@ import ProfileEducation from './ProfileEducation'
 import ProfileGithub from './ProfileGithub'
 import { getProfileById } from '../../actions/profile'
 
-const Profile = ({ getProfileById, profile: { profile }, auth, match }) => {
+const Profile = ({ match }) => {
+  const { profile } = useSelector((state) => state.profile)
+  const auth = useSelector((state) => state.auth)
+
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    getProfileById(match.params.id)
-  }, [getProfileById, match.params.id])
+    dispatch(getProfileById(match.params.id))
+  }, [dispatch, match.params.id])
 
   return (
     <>
@@ -82,9 +87,4 @@ Profile.propTypes = {
   auth: PropTypes.object.isRequired
 }
 
-const mapStateToProps = (state) => ({
-  profile: state.profile,
-  auth: state.auth
-})
-
-export default connect(mapStateToProps, { getProfileById })(Profile)
+export default Profile

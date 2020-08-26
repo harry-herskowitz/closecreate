@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { addExperience } from '../../actions/profile'
 
-const AddExperience = ({ addExperience, history }) => {
+const AddExperience = ({ history }) => {
+  const dispatch = useDispatch()
+
   const [formData, setFormData] = useState({
     company: '',
     title: '',
@@ -32,7 +34,7 @@ const AddExperience = ({ addExperience, history }) => {
         className="form"
         onSubmit={(e) => {
           e.preventDefault()
-          addExperience(formData, history)
+          dispatch(addExperience(formData, history))
         }}
       >
         <div className="form-group">
@@ -115,4 +117,4 @@ AddExperience.propTypes = {
   addExperience: PropTypes.func.isRequired
 }
 
-export default connect(null, { addExperience })(AddExperience)
+export default AddExperience
