@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
 import { addPost } from '../../actions/post'
 
@@ -34,10 +33,6 @@ const PostForm = () => {
       </form>
     </div>
   )
-}
-
-PostForm.propTypes = {
-  addPost: PropTypes.func.isRequired
 }
 
 export default PostForm

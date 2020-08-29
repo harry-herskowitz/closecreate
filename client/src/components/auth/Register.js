@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
 import { setAlert } from '../../actions/alert'
 import { register } from '../../actions/auth'
-import PropTypes from 'prop-types'
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -89,12 +88,6 @@ const Register = () => {
       </p>
     </>
   )
-}
-
-Register.propTypes = {
-  setAlert: PropTypes.func.isRequired,
-  register: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool
 }
 
 export default Register

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import PropTypes from 'prop-types'
 import { login } from '../../actions/auth'
 
 const Login = () => {
@@ -62,11 +61,6 @@ const Login = () => {
       </p>
     </>
   )
-}
-
-Login.propTypes = {
-  login: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool
 }
 
 export default Login

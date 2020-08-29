@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
 import PostItem from './PostItem'
 import PostForm from './PostForm'
@@ -28,11 +27,6 @@ const Posts = () => {
       </div>
     </>
   )
-}
-
-Posts.propTypes = {
-  getPosts: PropTypes.func.isRequired,
-  post: PropTypes.object.isRequired
 }
 
 export default Posts

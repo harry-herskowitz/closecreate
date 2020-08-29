@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
 import Moment from 'react-moment'
 import { deleteComment } from '../../actions/post'
@@ -37,13 +36,6 @@ const CommentItem = ({
       </div>
     </div>
   )
-}
-
-CommentItem.propTypes = {
-  postId: PropTypes.string.isRequired,
-  comment: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
-  deleteComment: PropTypes.func.isRequired
 }
 
 export default CommentItem

@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
 import { addComment } from '../../actions/post'
 
@@ -34,10 +33,6 @@ const CommentForm = ({ postId }) => {
       </form>
     </div>
   )
-}
-
-CommentForm.propTypes = {
-  addComment: PropTypes.func.isRequired
 }
 
 export default CommentForm

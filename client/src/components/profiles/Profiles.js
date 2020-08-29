@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
 import Spinner from '../layout/Spinner'
 import ProfileItem from './ProfileItem'
@@ -20,10 +19,9 @@ const Profiles = () => {
         <Spinner />
       ) : (
         <>
-          <h1 className="large text-primary">Developers</h1>
+          <h1 className="large text-primary">Creators</h1>
           <p className="lead">
-            <i className="fab fa-connectdevelop" /> Browse and connect with
-            developers
+            <i className="fab fa-connectdevelop" /> Creators in your area
           </p>
           <div className="profiles">
             {profiles.length > 0 ? (
@@ -38,11 +36,6 @@ const Profiles = () => {
       )}
     </>
   )
-}
-
-Profiles.propTypes = {
-  getProfiles: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired
 }
 
 export default Profiles
