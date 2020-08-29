@@ -116,7 +116,6 @@ Once merged you can push to heroku as above and your site will rebuild and be up
 
 ### Author
 
-Harry Herskowitz
 [Harry Herskowitz](http://www.harryherskowitz.com)
 
 ### Version
