@@ -14,6 +14,17 @@ const Navbar = () => {
         <Link to="/profiles">Creators</Link>
       </li>
       <li>
+        <Link to="/requests">
+          <i className="fas fa-user" />{' '}
+          <span className="hide-sm">Requests</span>
+        </Link>
+      </li>
+      <li>
+        <Link to="/matches">
+          <i className="fas fa-user" /> <span className="hide-sm">Matches</span>
+        </Link>
+      </li>
+      <li>
         <Link to="/dashboard">
           <i className="fas fa-user" />{' '}
           <span className="hide-sm">Dashboard</span>
