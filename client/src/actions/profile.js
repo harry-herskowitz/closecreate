@@ -6,7 +6,9 @@ import {
   GET_PROFILES,
   PROFILE_ERROR,
   CLEAR_PROFILE,
-  ACCOUNT_DELETED
+  ACCOUNT_DELETED,
+  ADD_REQUEST,
+  ADD_MATCH
 } from './types'
 
 // Get current users profile
@@ -109,5 +111,41 @@ export const deleteAccount = () => async (dispatch) => {
         payload: { msg: err.response.statusText, status: err.response.status }
       })
     }
+  }
+}
+
+//Add Request
+export const addRequest = (userId) => async (dispatch) => {
+  try {
+    const res = await api.post(`/users/request/${userId}`)
+
+    dispatch({
+      type: ADD_REQUEST,
+      payload: { userId, outgoingRequest: res.data, incomingRequest: res.data }
+    })
+    dispatch(setAlert('Collab Request Sent'))
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    })
+  }
+}
+
+//Add Match
+export const addMatch = (userId) => async (dispatch) => {
+  try {
+    const res = await api.post(`/users/match/${userId}`)
+
+    dispatch({
+      type: ADD_MATCH,
+      payload: { userId, matches: res.data }
+    })
+    dispatch(setAlert('Collab Request Sent'))
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    })
   }
 }

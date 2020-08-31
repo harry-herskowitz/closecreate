@@ -6,6 +6,8 @@ const jwt = require('jsonwebtoken')
 const config = require('config')
 const { check, validationResult } = require('express-validator')
 const normalize = require('normalize-url')
+const checkObjectId = require('../../middleware/checkObjectId')
+const auth = require('../../middleware/auth')
 
 const User = require('../../models/User')
 
@@ -78,6 +80,58 @@ router.post(
       )
     } catch (err) {
       console.error(err.message)
+      res.status(500).send('Server error')
+    }
+  }
+)
+
+// @route    POST api/users/request/:user_id
+// @desc     Add request to user
+// @access   Public
+
+router.post(
+  '/request/:user_id',
+  [auth, checkObjectId('user_id')],
+  async (req, res) => {
+    try {
+      const currentUser = await User.findById(req.user.id).select('-password')
+      const requestedUser = await User.findById(req.params.user_id).select(
+        '-password'
+      )
+      if (currentUser.outgoingRequests.includes(req.params.user_id))
+        return res.status(400).json({ msg: 'User already requested' })
+      currentUser.outgoingRequests.unshift(req.params.user_id)
+      await currentUser.save()
+      requestedUser.incomingRequests.unshift(req.params.user_id)
+      await requestedUser.save()
+      res.json({ msg: 'Collab Request Sent' })
+    } catch (error) {
+      console.error(error.message)
+      res.status(500).send('Server error')
+    }
+  }
+)
+
+// @route    POST api/users/match/:user_id
+// @desc     Add request to user
+// @access   Public
+
+router.post(
+  '/match/:user_id',
+  [auth, checkObjectId('user_id')],
+  async (req, res) => {
+    try {
+      const currentUser = await User.findById(req.user.id).select('-password')
+      const requestedUser = await User.findById(req.params.user_id).select(
+        '-password'
+      )
+      currentUser.matches.unshift(req.params.user_id)
+      await currentUser.save()
+      requestedUser.matches.unshift(req.params.user_id)
+      await requestedUser.save()
+      res.json({ msg: 'Collab Request Accepted' })
+    } catch (error) {
+      console.error(error.message)
       res.status(500).send('Server error')
     }
   }

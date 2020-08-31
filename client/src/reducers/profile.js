@@ -2,7 +2,9 @@ import {
   GET_PROFILE,
   PROFILE_ERROR,
   CLEAR_PROFILE,
-  GET_PROFILES
+  GET_PROFILES,
+  ADD_REQUEST,
+  ADD_MATCH
 } from '../actions/types'
 
 const initialState = {
@@ -17,6 +19,8 @@ export default function (state = initialState, action) {
 
   switch (type) {
     case GET_PROFILE:
+    case ADD_REQUEST:
+    case ADD_MATCH:
       return {
         ...state,
         profile: payload,

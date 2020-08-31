@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import { useDispatch } from 'react-redux'
+import { addRequest } from '../../actions/profile'
 
 const ProfileItem = ({
   profile: {
@@ -9,6 +11,7 @@ const ProfileItem = ({
     skills
   }
 }) => {
+  const dispatch = useDispatch()
   return (
     <div className="profile bg-light">
       <img src={avatar} alt="" className="round-img" />
@@ -18,6 +21,14 @@ const ProfileItem = ({
         <Link to={`/profile/${_id}`} className="btn btn-primary">
           View Profile
         </Link>
+        <button
+          onClick={() => dispatch(addRequest(_id))}
+          type="button"
+          className="btn btn-light"
+        >
+          {' '}
+          Request Collab{' '}
+        </button>
       </div>
       <ul>
         {skills.slice(0, 4).map((skill, index) => (
