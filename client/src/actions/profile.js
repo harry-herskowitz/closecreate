@@ -7,8 +7,27 @@ import {
   PROFILE_ERROR,
   CLEAR_PROFILE,
   ACCOUNT_DELETED,
-  ADD_MATCH
+  ADD_MATCH,
+  MATCH_ERROR,
+  USER_LOADED,
+  AUTH_ERROR
 } from './types'
+
+// Load User
+export const loadUser = () => async (dispatch) => {
+  try {
+    const res = await api.get('/auth')
+
+    dispatch({
+      type: USER_LOADED,
+      payload: res.data
+    })
+  } catch (err) {
+    dispatch({
+      type: AUTH_ERROR
+    })
+  }
+}
 
 // Get current users profile
 export const getCurrentProfile = () => async (dispatch) => {
@@ -29,8 +48,6 @@ export const getCurrentProfile = () => async (dispatch) => {
 
 // Get all profiles
 export const getProfiles = () => async (dispatch) => {
-  dispatch({ type: CLEAR_PROFILE })
-
   try {
     const res = await api.get('/profile')
 
@@ -127,9 +144,12 @@ export const addMatch = (userId) => async (dispatch) => {
         incomingRequest: res.data
       }
     })
+    dispatch(loadUser())
+    dispatch(getCurrentProfile())
+    dispatch(getProfiles())
   } catch (err) {
     dispatch({
-      type: PROFILE_ERROR,
+      type: MATCH_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }
     })
   }

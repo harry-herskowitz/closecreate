@@ -3,7 +3,8 @@ import {
   PROFILE_ERROR,
   CLEAR_PROFILE,
   GET_PROFILES,
-  ADD_MATCH
+  ADD_MATCH,
+  MATCH_ERROR
 } from '../actions/types'
 
 const initialState = {
@@ -36,6 +37,12 @@ export default function (state = initialState, action) {
         error: payload,
         loading: false,
         profile: null
+      }
+    case MATCH_ERROR:
+      return {
+        ...state,
+        error: payload,
+        loading: false
       }
     case CLEAR_PROFILE:
       return {

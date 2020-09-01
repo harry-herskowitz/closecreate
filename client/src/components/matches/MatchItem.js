@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { useDispatch } from 'react-redux'
 
 const MatchItem = ({
   profile: {
@@ -10,7 +9,6 @@ const MatchItem = ({
     skills
   }
 }) => {
-  const dispatch = useDispatch()
   return (
     <div className="profile bg-light">
       <img src={avatar} alt="" className="round-img" />

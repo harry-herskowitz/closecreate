@@ -2,16 +2,23 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Spinner from '../layout/Spinner'
 import ProfileItem from './ProfileItem'
-import { getProfiles } from '../../actions/profile'
+import { getProfiles, getCurrentProfile } from '../../actions/profile'
+import { loadUser } from '../../actions/auth'
 
 const Profiles = () => {
   const { user } = useSelector((state) => state.auth)
-  const { profiles, loading } = useSelector((state) => state.profile)
+  const {
+    profile: { location },
+    profiles,
+    loading
+  } = useSelector((state) => state.profile)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(getProfiles())
+    dispatch(getCurrentProfile())
+    dispatch(loadUser())
   }, [dispatch])
 
   return (
@@ -26,10 +33,18 @@ const Profiles = () => {
           </p>
           <div className="profiles">
             {profiles.filter(
-              (profile) => !user.matches.includes(profile.user._id)
+              (profile) =>
+                !user.matches.includes(profile.user._id) &&
+                !user.outgoingRequests.includes(profile.user._id) &&
+                profile.location === location
             ).length > 0 ? (
               profiles
-                .filter((profile) => !user.matches.includes(profile.user._id))
+                .filter(
+                  (profile) =>
+                    !user.matches.includes(profile.user._id) &&
+                    !user.outgoingRequests.includes(profile.user._id) &&
+                    profile.location === location
+                )
                 .map((profile) => (
                   <ProfileItem key={profile._id} profile={profile} />
                 ))
