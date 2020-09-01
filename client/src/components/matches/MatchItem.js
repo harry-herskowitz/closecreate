@@ -2,9 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
-import { addMatch } from '../../actions/profile'
 
-const ProfileItem = ({
+const MatchItem = ({
   profile: {
     user: { _id, name, avatar },
     location,
@@ -21,13 +20,6 @@ const ProfileItem = ({
         <Link to={`/profile/${_id}`} className="btn btn-primary">
           View Profile
         </Link>
-        <button
-          onClick={() => dispatch(addMatch(_id))}
-          type="button"
-          className="btn btn-light"
-        >
-          <i className="fas fa-handshake"></i>
-        </button>
       </div>
       <ul>
         {skills.slice(0, 4).map((skill, index) => (
@@ -40,8 +32,8 @@ const ProfileItem = ({
   )
 }
 
-ProfileItem.propTypes = {
+MatchItem.propTypes = {
   profile: PropTypes.object.isRequired
 }
 
-export default ProfileItem
+export default MatchItem

@@ -85,33 +85,6 @@ router.post(
   }
 )
 
-// @route    POST api/users/request/:user_id
-// @desc     Add request to user
-// @access   Public
-
-router.post(
-  '/request/:user_id',
-  [auth, checkObjectId('user_id')],
-  async (req, res) => {
-    try {
-      const currentUser = await User.findById(req.user.id).select('-password')
-      const requestedUser = await User.findById(req.params.user_id).select(
-        '-password'
-      )
-      if (currentUser.outgoingRequests.includes(req.params.user_id))
-        return res.status(400).json({ msg: 'User already requested' })
-      currentUser.outgoingRequests.unshift(req.params.user_id)
-      await currentUser.save()
-      requestedUser.incomingRequests.unshift(req.params.user_id)
-      await requestedUser.save()
-      res.json({ msg: 'Collab Request Sent' })
-    } catch (error) {
-      console.error(error.message)
-      res.status(500).send('Server error')
-    }
-  }
-)
-
 // @route    POST api/users/match/:user_id
 // @desc     Add request to user
 // @access   Public
@@ -125,11 +98,27 @@ router.post(
       const requestedUser = await User.findById(req.params.user_id).select(
         '-password'
       )
-      currentUser.matches.unshift(req.params.user_id)
-      await currentUser.save()
-      requestedUser.matches.unshift(req.params.user_id)
-      await requestedUser.save()
-      res.json({ msg: 'Collab Request Accepted' })
+
+      if (currentUser.outgoingRequests.includes(req.params.user_id))
+        return res.status(400).json({ msg: 'User already requested' })
+
+      if (
+        requestedUser.outgoingRequests &&
+        requestedUser.outgoingRequests.includes(req.user.id)
+      ) {
+        currentUser.matches.unshift(req.params.user_id)
+        await currentUser.save()
+        requestedUser.matches.unshift(req.user.id)
+        await requestedUser.save()
+        res.json({ msg: 'You have matched!' })
+      } else {
+        currentUser.outgoingRequests.unshift(req.params.user_id)
+        await currentUser.save()
+        requestedUser.incomingRequests.unshift(req.user.id)
+        await requestedUser.save()
+
+        res.json({ msg: 'Request sent' })
+      }
     } catch (error) {
       console.error(error.message)
       res.status(500).send('Server error')

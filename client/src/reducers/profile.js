@@ -3,7 +3,6 @@ import {
   PROFILE_ERROR,
   CLEAR_PROFILE,
   GET_PROFILES,
-  ADD_REQUEST,
   ADD_MATCH
 } from '../actions/types'
 
@@ -19,7 +18,6 @@ export default function (state = initialState, action) {
 
   switch (type) {
     case GET_PROFILE:
-    case ADD_REQUEST:
     case ADD_MATCH:
       return {
         ...state,

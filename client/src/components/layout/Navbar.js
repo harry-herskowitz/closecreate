@@ -11,23 +11,20 @@ const Navbar = () => {
   const authLinks = (
     <ul>
       <li>
-        <Link to="/profiles">Creators</Link>
-      </li>
-      <li>
-        <Link to="/requests">
-          <i className="fas fa-user" />{' '}
-          <span className="hide-sm">Requests</span>
+        <Link to="/profiles">
+          <i className="fab fa-connectdevelop" />{' '}
+          <span className="hide-sm">Creators</span>
         </Link>
       </li>
       <li>
         <Link to="/matches">
-          <i className="fas fa-user" /> <span className="hide-sm">Matches</span>
+          <i className="fas fa-handshake" />{' '}
+          <span className="hide-sm">Matches</span>
         </Link>
       </li>
       <li>
         <Link to="/dashboard">
-          <i className="fas fa-user" />{' '}
-          <span className="hide-sm">Dashboard</span>
+          <i className="fas fa-user" /> <span className="hide-sm">Profile</span>
         </Link>
       </li>
       <li>

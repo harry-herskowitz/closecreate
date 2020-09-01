@@ -7,7 +7,6 @@ import {
   PROFILE_ERROR,
   CLEAR_PROFILE,
   ACCOUNT_DELETED,
-  ADD_REQUEST,
   ADD_MATCH
 } from './types'
 
@@ -114,24 +113,6 @@ export const deleteAccount = () => async (dispatch) => {
   }
 }
 
-//Add Request
-export const addRequest = (userId) => async (dispatch) => {
-  try {
-    const res = await api.post(`/users/request/${userId}`)
-
-    dispatch({
-      type: ADD_REQUEST,
-      payload: { userId, outgoingRequest: res.data, incomingRequest: res.data }
-    })
-    dispatch(setAlert('Collab Request Sent'))
-  } catch (err) {
-    dispatch({
-      type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
-    })
-  }
-}
-
 //Add Match
 export const addMatch = (userId) => async (dispatch) => {
   try {
@@ -139,9 +120,13 @@ export const addMatch = (userId) => async (dispatch) => {
 
     dispatch({
       type: ADD_MATCH,
-      payload: { userId, matches: res.data }
+      payload: {
+        userId,
+        matches: res.data,
+        outgoingRequest: res.data,
+        incomingRequest: res.data
+      }
     })
-    dispatch(setAlert('Collab Request Sent'))
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,

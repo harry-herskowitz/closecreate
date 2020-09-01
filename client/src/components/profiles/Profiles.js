@@ -5,6 +5,7 @@ import ProfileItem from './ProfileItem'
 import { getProfiles } from '../../actions/profile'
 
 const Profiles = () => {
+  const { user } = useSelector((state) => state.auth)
   const { profiles, loading } = useSelector((state) => state.profile)
 
   const dispatch = useDispatch()
@@ -24,10 +25,14 @@ const Profiles = () => {
             <i className="fab fa-connectdevelop" /> Creators in your area
           </p>
           <div className="profiles">
-            {profiles.length > 0 ? (
-              profiles.map((profile) => (
-                <ProfileItem key={profile._id} profile={profile} />
-              ))
+            {profiles.filter(
+              (profile) => !user.matches.includes(profile.user._id)
+            ).length > 0 ? (
+              profiles
+                .filter((profile) => !user.matches.includes(profile.user._id))
+                .map((profile) => (
+                  <ProfileItem key={profile._id} profile={profile} />
+                ))
             ) : (
               <h4>No profiles found...</h4>
             )}

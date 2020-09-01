@@ -7,7 +7,6 @@ import Dashboard from '../dashboard/Dashboard'
 import ProfileForm from '../profile-forms/ProfileForm'
 import Profiles from '../profiles/Profiles'
 import Profile from '../profile/Profile'
-import Requests from '../requests/Requests'
 import Matches from '../matches/Matches'
 import NotFound from '../layout/NotFound'
 import PrivateRoute from '../routing/PrivateRoute'
@@ -21,7 +20,6 @@ const Routes = (props) => {
         <Route exact path="/login" component={Login} />
         <PrivateRoute exact path="/profile/:id" component={Profile} />
         <PrivateRoute exact path="/profiles" component={Profiles} />
-        <PrivateRoute exact path="/requests" component={Requests} />
         <PrivateRoute exact path="/matches" component={Matches} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <PrivateRoute exact path="/create-profile" component={ProfileForm} />
