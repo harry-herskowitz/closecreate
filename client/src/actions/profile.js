@@ -1,6 +1,6 @@
 import api from '../utils/api'
 import { setAlert } from './alert'
-
+import { loadUser } from './auth'
 import {
   GET_PROFILE,
   GET_PROFILES,
@@ -8,26 +8,8 @@ import {
   CLEAR_PROFILE,
   ACCOUNT_DELETED,
   ADD_MATCH,
-  MATCH_ERROR,
-  USER_LOADED,
-  AUTH_ERROR
+  MATCH_ERROR
 } from './types'
-
-// Load User
-export const loadUser = () => async (dispatch) => {
-  try {
-    const res = await api.get('/auth')
-
-    dispatch({
-      type: USER_LOADED,
-      payload: res.data
-    })
-  } catch (err) {
-    dispatch({
-      type: AUTH_ERROR
-    })
-  }
-}
 
 // Get current users profile
 export const getCurrentProfile = () => async (dispatch) => {
