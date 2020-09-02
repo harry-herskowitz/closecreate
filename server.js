@@ -1,6 +1,7 @@
 const express = require('express')
-const connectDB = require('./config/db')
 const path = require('path')
+const socket = require('socket.io')
+const connectDB = require('./config/db')
 
 const app = express()
 
@@ -14,6 +15,7 @@ app.use(express.json())
 app.use('/api/users', require('./routes/api/users'))
 app.use('/api/auth', require('./routes/api/auth'))
 app.use('/api/profile', require('./routes/api/profile'))
+app.use('/api/chat', require('./routes/api/chat'))
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
@@ -25,6 +27,19 @@ if (process.env.NODE_ENV === 'production') {
   })
 }
 
+//Server
 const PORT = process.env.PORT || 5000
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
+var server = app.listen(PORT, () =>
+  console.log(`Server started on port ${PORT}`)
+)
+
+//Socket.io
+const io = socket(server)
+
+io.on('connection', (socket) => {
+  socket.emit('your id', socket.id)
+  socket.on('send message', (body) => {
+    io.emit('message', body)
+  })
+})

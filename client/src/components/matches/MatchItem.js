@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 
 const MatchItem = ({
@@ -9,6 +10,8 @@ const MatchItem = ({
     skills
   }
 }) => {
+  const { user } = useSelector((state) => state.auth)
+
   return (
     <div className="profile bg-light">
       <img src={avatar} alt="" className="round-img" />
@@ -18,6 +21,7 @@ const MatchItem = ({
         <Link to={`/profile/${_id}`} className="btn btn-primary">
           View Profile
         </Link>
+        <Link to={`/chat/${_id}&${user._id}`}>Chat</Link>
       </div>
       <ul>
         {skills.slice(0, 4).map((skill, index) => (
