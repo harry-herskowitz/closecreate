@@ -38,7 +38,6 @@ var server = app.listen(PORT, () =>
 const io = socket(server)
 
 io.on('connection', (socket) => {
-  socket.emit('your id', socket.id)
   socket.on('send message', (body) => {
     io.emit('message', body)
   })

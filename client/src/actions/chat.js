@@ -19,9 +19,9 @@ export const getChat = (id1, id2) => async (dispatch) => {
 }
 
 // Create or update chat
-export const createChat = (messages) => async (dispatch) => {
+export const createChat = (id1, id2, messages) => async (dispatch) => {
   try {
-    const res = await api.post('/chat', messages)
+    const res = await api.post(`/chat/${id1}&${id2}`, messages)
 
     dispatch({
       type: GET_CHAT,

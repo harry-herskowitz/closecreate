@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const auth = require('../../middleware/auth')
+const mongoose = require('mongoose')
 const { check, validationResult } = require('express-validator')
 const checkObjectId = require('../../middleware/checkObjectId')
 
@@ -15,7 +16,7 @@ router.get(
   async ({ params: { id1, id2 } }, res) => {
     try {
       const chat = await Chat.findOne({
-        users: { $in: [id1, id2] }
+        $and: [{ users: { $in: id1 } }, { users: { $in: id2 } }]
       })
       return res.json(chat)
     } catch (error) {
@@ -26,24 +27,28 @@ router.get(
 )
 
 //Create and update chat by users ids
-router.post('/', auth, async (req, res) => {
+router.post('/:id1&:id2', auth, async (req, res) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() })
   }
 
-  const { messages } = req.body
+  const messages = req.body
 
-  const chatFields = {
-    users: [req.params.id1, req.params.id2],
-    messages
-  }
+  console.log(messages)
 
   try {
     // Using upsert option (creates new doc if no match is found):
     let chat = await Chat.findOneAndUpdate(
-      { users: { $in: [req.params.id1, req.params.id2] } },
-      { $set: chatFields },
+      {
+        users: {
+          $all: [
+            { $elemMatch: { $eq: mongoose.Types.ObjectId(req.params.id1) } },
+            { $elemMatch: { $eq: mongoose.Types.ObjectId(req.params.id2) } }
+          ]
+        }
+      },
+      { $set: { users: [req.params.id1, req.params.id2], messages } },
       { new: true, upsert: true }
     )
     res.json(chat)
