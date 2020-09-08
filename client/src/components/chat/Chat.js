@@ -10,29 +10,24 @@ const Chat = ({ match }) => {
   const { chat } = useSelector((state) => state.chat)
   const { user } = useSelector((state) => state.auth)
 
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState(chat.messages)
   const [message, setMessage] = useState('')
 
   const socketRef = useRef()
 
   useEffect(() => {
     dispatch(getChat(match.params.id1, match.params.id2))
-
-    chat && chat.loading && setMessages(chat.messages)
-
     socketRef.current = io.connect('/')
-
     socketRef.current.on('message', (message) => {
       receivedMessage(message)
     })
-    if (chat) setMessages(chat.messages)
-    // eslint-disable-next-line
-  }, [])
+  }, [dispatch, match.params.id1, match.params.id2])
 
   useEffect(() => {
-    dispatch(createChat(match.params.id1, match.params.id2, messages))
-    // eslint-disable-next-line
-  }, [messages])
+    if (messages.length > 0) {
+      dispatch(createChat(match.params.id1, match.params.id2, messages))
+    }
+  }, [dispatch, match.params.id1, match.params.id2, messages])
 
   function receivedMessage(message) {
     setMessages((oldMsgs) => [...oldMsgs, message])
@@ -45,6 +40,7 @@ const Chat = ({ match }) => {
       user: user._id
     }
     setMessage('')
+    setMessages(chat.messages)
     socketRef.current.emit('send message', messageObject)
   }
 
@@ -54,12 +50,12 @@ const Chat = ({ match }) => {
 
   return (
     <>
-      {chat && chat.loading ? (
+      {chat === null ? (
         <Spinner />
       ) : (
         <div>
           <div>
-            {messages.map((message, index) => {
+            {chat.messages.map((message, index) => {
               if (message.user === user._id) {
                 return (
                   <div key={index}>

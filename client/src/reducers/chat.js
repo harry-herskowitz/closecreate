@@ -1,7 +1,10 @@
 import { GET_CHAT, CHAT_ERROR } from '../actions/types'
 
 const initialState = {
-  chat: null,
+  chat: {
+    users: [],
+    messages: []
+  },
   loading: true,
   error: {}
 }
@@ -21,7 +24,10 @@ export default function (state = initialState, action) {
         ...state,
         error: payload,
         loading: false,
-        chat: null
+        chat: {
+          users: [],
+          messages: []
+        }
       }
     default:
       return state

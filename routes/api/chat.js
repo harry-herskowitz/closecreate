@@ -13,12 +13,41 @@ router.get(
   checkObjectId('id1'),
   checkObjectId('id2'),
   auth,
-  async ({ params: { id1, id2 } }, res) => {
+  async (req, res) => {
     try {
       const chat = await Chat.findOne({
-        $and: [{ users: { $in: id1 } }, { users: { $in: id2 } }]
+        $and: [
+          { users: { $in: req.params.id1 } },
+          { users: { $in: req.params.id2 } }
+        ]
       })
-      return res.json(chat)
+      if (chat) {
+        return res.json(chat)
+      } else {
+        try {
+          // Using upsert option (creates new doc if no match is found):
+          let chat = await Chat.findOneAndUpdate(
+            {
+              users: {
+                $all: [
+                  {
+                    $elemMatch: { $eq: mongoose.Types.ObjectId(req.params.id1) }
+                  },
+                  {
+                    $elemMatch: { $eq: mongoose.Types.ObjectId(req.params.id2) }
+                  }
+                ]
+              }
+            },
+            { $set: { users: [req.params.id1, req.params.id2] } },
+            { new: true, upsert: true }
+          )
+          res.json(chat)
+        } catch (err) {
+          console.error(err.message)
+          res.status(500).send('Server Error')
+        }
+      }
     } catch (error) {
       console.error(error.message)
       return res.status(500).json({ msg: 'Server error' })
@@ -34,8 +63,6 @@ router.post('/:id1&:id2', auth, async (req, res) => {
   }
 
   const messages = req.body
-
-  console.log(messages)
 
   try {
     // Using upsert option (creates new doc if no match is found):
