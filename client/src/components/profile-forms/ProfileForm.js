@@ -2,7 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
-import { createProfile, getCurrentProfile } from '../../actions/profile'
+import {
+  createProfile,
+  getCurrentProfile,
+  uploadPicture,
+  updateProfilePicture
+} from '../../actions/profile'
+import { v1 as uuidv1 } from 'uuid'
 
 const initialState = {
   location: '',
@@ -21,6 +27,8 @@ const ProfileForm = ({ history }) => {
   const [displaySocialInputs, toggleSocialInputs] = useState(false)
 
   const { profile, loading } = useSelector((state) => state.profile)
+
+  const [imageSrc, setImageSrc] = useState(profile ? profile.picture : '')
 
   const dispatch = useDispatch()
 
@@ -59,6 +67,23 @@ const ProfileForm = ({ history }) => {
     dispatch(createProfile(formData, history, profile ? true : false))
   }
 
+  const onFileChange = (e) => {
+    let data = new FormData()
+    let file = e.target.files[0]
+    let filename = uuidv1() + '.' + file.name.split('.').pop()
+    console.log(filename)
+    data.append('picture', file, filename)
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    }
+    dispatch(uploadPicture(data, config)).then(() => {
+      setImageSrc(filename)
+    })
+    dispatch(updateProfilePicture(filename))
+  }
+
   return (
     <>
       <h1 className="large text-primary">Edit Your Profile</h1>
@@ -66,6 +91,18 @@ const ProfileForm = ({ history }) => {
         <i className="fas fa-user" /> Add some changes to your profile
       </p>
       <small>* = required field</small>
+      {profile && profile.picture && (
+        <img src={`/api/get_file/${imageSrc}`}></img>
+      )}
+      <div className="form-group">
+        <input
+          type="file"
+          placeholder="* Profile Picture"
+          name="picture"
+          onChange={onFileChange}
+        />
+        <small className="form-text">Upload a new profile picture</small>
+      </div>
       <form className="form" onSubmit={onSubmit}>
         <div className="form-group">
           <input

@@ -17,7 +17,7 @@ router.get('/me', auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({
       user: req.user.id
-    }).populate('user', ['name', 'avatar'])
+    }).populate('user', ['name', 'picture'])
 
     if (!profile) {
       return res.status(400).json({ msg: 'There is no profile for this user' })
@@ -85,6 +85,24 @@ router.post(
   }
 )
 
+// @route    POST api/profile/picture
+// @desc     Create or update user profile picture
+// @access   Private
+router.post('/picture', auth, async (req, res) => {
+  try {
+    // Using upsert option (creates new doc if no match is found):
+    let profile = await Profile.findOneAndUpdate(
+      { user: req.user.id },
+      { picture: req.body.filename },
+      { new: true, upsert: false }
+    )
+    res.json(profile)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('Server Error')
+  }
+})
+
 // @route    GET api/profile
 // @desc     Get all profiles
 // @access   Public
@@ -92,7 +110,7 @@ router.get('/', auth, async (req, res) => {
   try {
     const profiles = await Profile.find({
       user: { $ne: req.user.id }
-    }).populate('user', ['name', 'avatar'])
+    }).populate('user', ['name', 'picture'])
     res.json(profiles)
   } catch (err) {
     console.error(err.message)
@@ -110,7 +128,7 @@ router.get(
     try {
       const profile = await Profile.findOne({
         user: user_id
-      }).populate('user', ['name', 'avatar'])
+      }).populate('user', ['name', 'picture'])
 
       if (!profile) return res.status(400).json({ msg: 'Profile not found' })
 

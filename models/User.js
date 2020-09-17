@@ -29,6 +29,12 @@ const UserSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  latitude: {
+    type: String
+  },
+  longitude: {
+    type: String
   }
 })
 

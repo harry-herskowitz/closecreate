@@ -5,7 +5,8 @@ import PropTypes from 'prop-types'
 
 const MatchItem = ({
   profile: {
-    user: { _id, name, avatar },
+    user: { _id, name },
+    picture,
     location,
     skills
   }
@@ -14,7 +15,7 @@ const MatchItem = ({
 
   return (
     <div className="profile bg-light">
-      <img src={avatar} alt="" className="round-img" />
+      {picture && <img src={`/api/get_file/${picture}`}></img>}
       <div>
         <h2>{name}</h2>
         <p className="my-1">{location && <span>{location}</span>}</p>

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Navbar from './components/layout/Navbar'
 import Landing from './components/layout/Landing'
@@ -16,18 +16,31 @@ const App = () => {
   useEffect(() => {
     setAuthToken(localStorage.token)
     store.dispatch(loadUser())
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function (position) {
+          console.log(position)
+        },
+        function (error) {
+          alert('Error occurred. Error code: ' + error.code)
+        },
+        { timeout: 5000 }
+      )
+    } else {
+      alert('no geolocation support')
+    }
   }, [])
 
   return (
     <Provider store={store}>
       <Router>
-        <Fragment>
+        <>
           <Navbar />
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route component={Routes} />
           </Switch>
-        </Fragment>
+        </>
       </Router>
     </Provider>
   )

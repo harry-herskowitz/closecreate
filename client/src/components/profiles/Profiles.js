@@ -38,16 +38,9 @@ const Profiles = () => {
                 !user.outgoingRequests.includes(profile.user._id) &&
                 profile.location === location
             ).length > 0 ? (
-              profiles
-                .filter(
-                  (profile) =>
-                    !user.matches.includes(profile.user._id) &&
-                    !user.outgoingRequests.includes(profile.user._id) &&
-                    profile.location === location
-                )
-                .map((profile) => (
-                  <ProfileItem key={profile._id} profile={profile} />
-                ))
+              profiles.map((profile) => (
+                <ProfileItem key={profile._id} profile={profile} />
+              ))
             ) : (
               <h4>No profiles found...</h4>
             )}

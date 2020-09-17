@@ -62,6 +62,30 @@ export const getProfileById = (userId) => async (dispatch) => {
   }
 }
 
+//Upload Picture
+export const uploadPicture = (file) => async (dispatch) => {
+  try {
+    await api.post('/post_file', file)
+  } catch (err) {
+    const errors = err.response.data.errors
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')))
+    }
+  }
+}
+
+//Update Profile Picture
+export const updateProfilePicture = (filename) => async (dispatch) => {
+  try {
+    await api.post('/profile/picture', { filename: filename })
+  } catch (err) {
+    const errors = err.response.data.errors
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')))
+    }
+  }
+}
+
 // Create or update profile
 export const createProfile = (formData, history, edit = false) => async (
   dispatch

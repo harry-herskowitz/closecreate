@@ -5,12 +5,13 @@ const ProfileTop = ({
   profile: {
     location,
     social,
-    user: { name, avatar }
+    picture,
+    user: { name }
   }
 }) => {
   return (
     <div className="profile-top bg-primary p-2">
-      <img className="round-img my-1" src={avatar} alt="" />
+      {picture && <img src={`/api/get_file/${picture}`}></img>}
       <h1 className="large">{name}</h1>
       <p>{location && <span>{location}</span>}</p>
       <div className="icons my-1">

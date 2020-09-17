@@ -1,4 +1,5 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 const path = require('path')
 const socket = require('socket.io')
 const connectDB = require('./config/db')
@@ -13,6 +14,8 @@ const app = express()
 connectDB()
 
 // Init Middleware
+app.use(bodyParser.json({ limit: '50mb' }))
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 app.use(express.json())
 
 // Define Routes
@@ -30,15 +33,6 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
   })
 }
-
-//Socket.io
-const io = socket(server)
-
-io.on('connection', (socket) => {
-  socket.on('send message', (body) => {
-    io.emit('message', body)
-  })
-})
 
 // configuring the DiscStorage engine.
 const storage = multer.diskStorage({
@@ -62,14 +56,14 @@ AWS.config.update({
 const s3 = new AWS.S3()
 
 //POST method route for uploading file
-app.post('/post_file', upload.single('demo_file'), function (req, res) {
+app.post('/api/post_file', upload.single('picture'), function (req, res) {
   //Multer middleware adds file(in case of single file ) or files(multiple files) object to the request object.
   //req.file is the demo_file
   uploadFile(req.file.path, req.file.filename, res)
 })
 
 //GET method route for downloading/retrieving file
-app.get('/get_file/:file_name', (req, res) => {
+app.get('/api/get_file/:file_name', (req, res) => {
   retrieveFile(req.params.file_name, res)
 })
 
@@ -123,3 +117,12 @@ const PORT = process.env.PORT || 5000
 var server = app.listen(PORT, () =>
   console.log(`Server started on port ${PORT}`)
 )
+
+//Socket.io
+const io = socket(server)
+
+io.on('connection', (socket) => {
+  socket.on('send message', (body) => {
+    io.emit('message', body)
+  })
+})

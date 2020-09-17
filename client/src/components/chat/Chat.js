@@ -21,7 +21,8 @@ const Chat = ({ match }) => {
     socketRef.current.on('message', (message) => {
       receivedMessage(message)
     })
-  }, [dispatch, match.params.id1, match.params.id2])
+    // eslint-disable-next-line
+  }, [])
 
   useEffect(() => {
     if (messages.length > 0) {
