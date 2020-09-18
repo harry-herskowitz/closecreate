@@ -77,3 +77,19 @@ export const login = (email, password) => async (dispatch) => {
 
 // Logout
 export const logout = async (dispatch) => dispatch({ type: LOGOUT })
+
+//Update Geolocation
+export const geolocate = (latitude, longitude) => async (dispatch) => {
+  try {
+    const body = {
+      latitude,
+      longitude
+    }
+    await api.post('/users/geolocation', body)
+  } catch (err) {
+    const errors = err.response.data.errors
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')))
+    }
+  }
+}

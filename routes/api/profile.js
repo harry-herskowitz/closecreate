@@ -110,7 +110,7 @@ router.get('/', auth, async (req, res) => {
   try {
     const profiles = await Profile.find({
       user: { $ne: req.user.id }
-    }).populate('user', ['name', 'picture'])
+    }).populate('user', ['name', 'picture', 'latitude', 'longitude'])
     res.json(profiles)
   } catch (err) {
     console.error(err.message)

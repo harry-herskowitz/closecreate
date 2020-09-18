@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
 import { setAlert } from '../../actions/alert'
-import { register } from '../../actions/auth'
+import { geolocate, register } from '../../actions/auth'
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -26,7 +26,13 @@ const Register = () => {
     if (password !== password2) {
       dispatch(setAlert('Passwords do not match', 'danger'))
     } else {
-      dispatch(register({ name, email, password }))
+      dispatch(register({ name, email, password })).then(() => {
+        navigator.geolocation.getCurrentPosition((position) => {
+          dispatch(
+            geolocate(position.coords.latitude, position.coords.longitude)
+          )
+        })
+      })
     }
   }
 

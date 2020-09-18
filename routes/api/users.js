@@ -116,4 +116,21 @@ router.post(
   }
 )
 
+// @route    POST api/users/geolocation
+// @desc     update user geolocation
+// @access   Public
+
+router.post('/geolocation', [auth], async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password')
+    user.latitude = req.body.latitude
+    user.longitude = req.body.longitude
+    await user.save()
+    res.json({ msg: 'Location Saved' })
+  } catch (error) {
+    console.error(error.message)
+    res.status(500).send('Server error')
+  }
+})
+
 module.exports = router

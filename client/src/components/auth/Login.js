@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { login } from '../../actions/auth'
+import { geolocate, login } from '../../actions/auth'
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -20,7 +20,11 @@ const Login = () => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    dispatch(login(email, password))
+    dispatch(login(email, password)).then(() => {
+      navigator.geolocation.getCurrentPosition((position) => {
+        dispatch(geolocate(position.coords.latitude, position.coords.longitude))
+      })
+    })
   }
 
   if (isAuthenticated) {
