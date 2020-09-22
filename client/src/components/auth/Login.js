@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { geolocate, login } from '../../actions/auth'
+import { getProfileById } from '../../actions/profile'
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -9,7 +10,7 @@ const Login = () => {
     password: ''
   })
 
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
+  const { isAuthenticated, user } = useSelector((state) => state.auth)
 
   const dispatch = useDispatch()
 

@@ -10,22 +10,14 @@ import store from './store'
 import { loadUser } from './actions/auth'
 import setAuthToken from './utils/setAuthToken'
 
-import './App.css'
+require('halfmoon/css/halfmoon-variables.min.css')
 
 const App = () => {
   useEffect(() => {
     setAuthToken(localStorage.token)
     store.dispatch(loadUser())
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        function (position) {
-          console.log(position)
-        },
-        function (error) {
-          alert('Error occurred. Error code: ' + error.code)
-        },
-        { timeout: 5000 }
-      )
+    if ('geolocation' in navigator) {
+      console.log('geolocation supported')
     } else {
       alert('no geolocation support')
     }
@@ -34,13 +26,13 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        <>
+        <div class="page-wrapper with-navbar">
           <Navbar />
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route component={Routes} />
           </Switch>
-        </>
+        </div>
       </Router>
     </Provider>
   )
