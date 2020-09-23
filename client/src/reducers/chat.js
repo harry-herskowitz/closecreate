@@ -1,4 +1,4 @@
-import { GET_CHAT, CHAT_ERROR } from '../actions/types'
+import { GET_CHAT, CHAT_ERROR, CLEAR_CHAT } from '../actions/types'
 
 const initialState = {
   chat: {
@@ -23,6 +23,15 @@ export default function (state = initialState, action) {
       return {
         ...state,
         error: payload,
+        loading: false,
+        chat: {
+          users: [],
+          messages: []
+        }
+      }
+    case CLEAR_CHAT:
+      return {
+        ...state,
         loading: false,
         chat: {
           users: [],

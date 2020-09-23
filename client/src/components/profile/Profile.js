@@ -29,9 +29,6 @@ const Profile = ({ match }) => {
               </Link>
             )}
           <ProfileInfo profile={profile} />
-          <Link to="/profiles" className="btn btn-light">
-            Back To Profiles
-          </Link>
         </div>
       )}
     </>

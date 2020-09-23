@@ -7,19 +7,19 @@ import { getCurrentProfile } from '../../actions/profile'
 
 const Dashboard = () => {
   const { profile } = useSelector((state) => state.profile)
-  const auth = useSelector((state) => state.auth)
+  const { user } = useSelector((state) => state.auth)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (auth.user._id) {
+    if (user !== {}) {
       dispatch(getCurrentProfile())
     }
-  }, [dispatch, auth.user])
+  }, [dispatch, user])
 
   return (
     <>
-      {profile === null ? (
+      {profile === null || Object.entries(user).length === 0 ? (
         <div className="card">
           <p>Welcome! Create a Profile to get started</p>
           <Link to="/create-profile" className="btn btn-primary">
@@ -29,7 +29,7 @@ const Dashboard = () => {
       ) : (
         <div className="card">
           <div className="card-content">
-            <ProfileInfo profile={profile} />
+            <ProfileInfo profile={profile} user={user} />
           </div>
 
           <div className="row justify-content-center">

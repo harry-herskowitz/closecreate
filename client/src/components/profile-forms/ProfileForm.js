@@ -15,11 +15,11 @@ import Resizer from 'react-image-file-resizer'
 const initialState = {
   location: '',
   bio: '',
-  twitter: '',
-  facebook: '',
-  linkedin: '',
-  youtube: '',
-  instagram: ''
+  twitter: 'https://twitter.com/',
+  facebook: 'https://facebook.com/',
+  linkedin: 'https://linkedin.com/in/',
+  youtube: 'https://youtube.com/channel/',
+  instagram: 'https://instagram.com/'
 }
 
 const ProfileForm = ({ history }) => {
@@ -103,7 +103,7 @@ const ProfileForm = ({ history }) => {
   return (
     <div className="card">
       <h1 className="card-title">Edit Your Profile</h1>
-      {imageSrc !== '' && (
+      {imageSrc && (
         <img
           className="rounded"
           src={`/api/get_file/${imageSrc}`}

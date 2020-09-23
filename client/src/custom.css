@@ -14,6 +14,10 @@
 .card-title {
   padding-top: 15px;
 }
+.social {
+  max-width: 200px;
+  margin: auto;
+}
 nav i {
   font-size: 20px;
 }
@@ -28,7 +32,7 @@ img {
   max-width: 600px;
 }
 nav + div {
-  margin-top: 20px !important;
+  margin-top: 50px !important;
   margin-bottom: 60px !important;
 }
 .chat {

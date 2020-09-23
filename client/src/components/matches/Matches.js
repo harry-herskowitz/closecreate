@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import MatchItem from './MatchItem'
 import { getProfiles } from '../../actions/profile'
+import { clearChat } from '../../actions/chat'
 
 const Matches = () => {
   const { user } = useSelector((state) => state.auth)
@@ -11,6 +12,7 @@ const Matches = () => {
 
   useEffect(() => {
     dispatch(getProfiles())
+    dispatch(clearChat())
   }, [dispatch])
 
   return (

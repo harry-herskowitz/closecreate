@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Navbar from './components/layout/Navbar'
+import NavbarBottom from './components/layout/NavbarBottom'
 import Landing from './components/layout/Landing'
 import Routes from './components/routing/Routes'
 
@@ -33,9 +34,10 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <div
-          className={`page-wrapper with-navbar-fixed-bottom justify-content-center ${theme}`}
+          className={`page-wrapper with-navbar with-navbar-fixed-bottom justify-content-center ${theme}`}
         >
           <Navbar />
+          <NavbarBottom />
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route component={Routes} />

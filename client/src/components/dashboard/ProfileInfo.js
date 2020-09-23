@@ -1,15 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const ProfileInfo = ({
-  profile: {
-    bio,
-    location,
-    social,
-    picture,
-    user: { name }
-  }
-}) => {
+const ProfileInfo = ({ profile: { bio, location, social, picture }, user }) => {
   return (
     <>
       {picture && (
@@ -23,32 +15,32 @@ const ProfileInfo = ({
       )}
       <div className="row justify-content-center">
         <h1 className="card-title">
-          {name.toUpperCase()},{' '}
+          {user.name.toUpperCase()},{' '}
           {location && <span>{location.toUpperCase()}</span>}
         </h1>
       </div>
-      <div className="row justify-content-center">
-        {social && social.twitter && (
+      <div className="row justify-content-around social">
+        {social.twitter !== 'https://twitter.com/' && (
           <a href={social.twitter} target="_blank" rel="noopener noreferrer">
             <i className="fab fa-twitter fa-2x" />
           </a>
         )}
-        {social && social.facebook && (
+        {social.facebook !== 'https://facebook.com/' && (
           <a href={social.facebook} target="_blank" rel="noopener noreferrer">
             <i className="fab fa-facebook fa-2x" />
           </a>
         )}
-        {social && social.linkedin && (
+        {social.linkedin !== 'https://linkedin.com/in/' && (
           <a href={social.linkedin} target="_blank" rel="noopener noreferrer">
             <i className="fab fa-linkedin fa-2x" />
           </a>
         )}
-        {social && social.youtube && (
+        {social.youtube !== 'https://youtube.com/channel/' && (
           <a href={social.youtube} target="_blank" rel="noopener noreferrer">
             <i className="fab fa-youtube fa-2x" />
           </a>
         )}
-        {social && social.instagram && (
+        {social.instagram !== 'https://instagram.com/' && (
           <a href={social.instagram} target="_blank" rel="noopener noreferrer">
             <i className="fab fa-instagram fa-2x" />
           </a>
@@ -65,7 +57,8 @@ const ProfileInfo = ({
 }
 
 ProfileInfo.propTypes = {
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired
 }
 
 export default ProfileInfo

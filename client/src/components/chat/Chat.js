@@ -27,7 +27,8 @@ const Chat = ({ match }) => {
     if (messages.length > 0) {
       dispatch(createChat(match.params.id1, match.params.id2, messages))
     }
-  }, [dispatch, match.params.id1, match.params.id2, messages])
+    // eslint-disable-next-line
+  }, [messages])
 
   function receivedMessage(message) {
     setMessages((oldMsgs) => [...oldMsgs, message])

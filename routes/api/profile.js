@@ -54,8 +54,12 @@ router.post('/', auth, async (req, res) => {
   const socialfields = { youtube, twitter, instagram, linkedin, facebook }
 
   for (const [key, value] of Object.entries(socialfields)) {
-    if (value && value.length > 0)
-      socialfields[key] = normalize(value, { forceHttps: true })
+    if (value && value.length > 0) {
+      socialfields[key] = normalize(value, {
+        forceHttps: true
+      })
+      socialfields[key] = socialfields[key] + '/'
+    }
   }
   profileFields.social = socialfields
 
