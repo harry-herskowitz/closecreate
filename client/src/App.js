@@ -10,7 +10,13 @@ import store from './store'
 import { loadUser } from './actions/auth'
 import setAuthToken from './utils/setAuthToken'
 
+import './custom.css'
 require('halfmoon/css/halfmoon-variables.min.css')
+
+let theme = 'dark-mode'
+window.matchMedia('(prefers-color-scheme: dark)').matches
+  ? (theme = 'dark-mode')
+  : (theme = 'light-mode')
 
 const App = () => {
   useEffect(() => {
@@ -26,7 +32,9 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        <div class="page-wrapper with-navbar">
+        <div
+          className={`page-wrapper with-navbar-fixed-bottom justify-content-center ${theme}`}
+        >
           <Navbar />
           <Switch>
             <Route exact path="/" component={Landing} />

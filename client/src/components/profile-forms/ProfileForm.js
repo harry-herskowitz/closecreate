@@ -6,13 +6,14 @@ import {
   createProfile,
   getCurrentProfile,
   uploadPicture,
-  updateProfilePicture
+  updateProfilePicture,
+  deleteAccount
 } from '../../actions/profile'
 import { v1 as uuidv1 } from 'uuid'
+import Resizer from 'react-image-file-resizer'
 
 const initialState = {
   location: '',
-  skills: '',
   bio: '',
   twitter: '',
   facebook: '',
@@ -42,15 +43,12 @@ const ProfileForm = ({ history }) => {
       for (const key in profile.social) {
         if (key in profileData) profileData[key] = profile.social[key]
       }
-      if (Array.isArray(profileData.skills))
-        profileData.skills = profileData.skills.join(', ')
       setFormData(profileData)
     }
   }, [dispatch, profile, loading])
 
   const {
     location,
-    skills,
     bio,
     twitter,
     facebook,
@@ -67,12 +65,30 @@ const ProfileForm = ({ history }) => {
     dispatch(createProfile(formData, history, profile ? true : false))
   }
 
-  const onFileChange = (e) => {
+  const resizeFile = (file) =>
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file, // the file from input
+        480, // width
+        480, // height
+        'JPEG', // compress format WEBP, JPEG, PNG
+        70, // quality
+        0, // rotation
+        (uri) => {
+          // You upload logic goes here
+          resolve(uri)
+        },
+        'blob' // blob or base64 default base64
+      )
+    })
+
+  const onFileChange = async (e) => {
     let data = new FormData()
     let file = e.target.files[0]
     let filename = uuidv1() + '.' + file.name.split('.').pop()
     console.log(filename)
-    data.append('picture', file, filename)
+    const image = await resizeFile(file)
+    data.append('picture', image, filename)
     const config = {
       headers: {
         'content-type': 'multipart/form-data'
@@ -85,27 +101,30 @@ const ProfileForm = ({ history }) => {
   }
 
   return (
-    <>
-      <h1 className="large text-primary">Edit Your Profile</h1>
-      <p className="lead">
-        <i className="fas fa-user" /> Add some changes to your profile
-      </p>
-      <small>* = required field</small>
-      {profile && profile.picture && (
-        <img src={`/api/get_file/${imageSrc}`}></img>
+    <div className="card">
+      <h1 className="card-title">Edit Your Profile</h1>
+      {imageSrc !== '' && (
+        <img
+          className="rounded"
+          src={`/api/get_file/${imageSrc}`}
+          alt="avatar"
+        ></img>
       )}
-      <div className="form-group">
-        <input
-          type="file"
-          placeholder="* Profile Picture"
-          name="picture"
-          onChange={onFileChange}
-        />
-        <small className="form-text">Upload a new profile picture</small>
+      <div className="custom-file">
+        <label>
+          <input
+            type="file"
+            id="file-input-1"
+            name="picture"
+            onChange={onFileChange}
+          />
+          Upload a new profile picture
+        </label>
       </div>
       <form className="form" onSubmit={onSubmit}>
         <div className="form-group">
           <input
+            className="form-control"
             type="text"
             placeholder="* Location"
             name="location"
@@ -118,20 +137,8 @@ const ProfileForm = ({ history }) => {
           </small>
         </div>
         <div className="form-group">
-          <input
-            type="text"
-            placeholder="* Skills"
-            name="skills"
-            value={skills}
-            onChange={onChange}
-            required
-          />
-          <small className="form-text">
-            Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)
-          </small>
-        </div>
-        <div className="form-group">
           <textarea
+            className="form-control"
             placeholder="* A short bio of yourself"
             name="bio"
             value={bio}
@@ -141,22 +148,20 @@ const ProfileForm = ({ history }) => {
           <small className="form-text">Tell us a little about yourself</small>
         </div>
 
-        <div className="my-2">
-          <button
-            onClick={() => toggleSocialInputs(!displaySocialInputs)}
-            type="button"
-            className="btn btn-light"
-          >
-            Add Social Network Links
-          </button>
-          <span>Optional</span>
-        </div>
+        <button
+          onClick={() => toggleSocialInputs(!displaySocialInputs)}
+          type="button"
+          className="btn btn-light"
+        >
+          Add Social Network Links
+        </button>
 
         {displaySocialInputs && (
           <>
-            <div className="form-group social-input">
+            <div className="form-group">
               <i className="fab fa-twitter fa-2x" />
               <input
+                className="form-control"
                 type="text"
                 placeholder="Twitter URL"
                 name="twitter"
@@ -165,9 +170,10 @@ const ProfileForm = ({ history }) => {
               />
             </div>
 
-            <div className="form-group social-input">
+            <div className="form-group">
               <i className="fab fa-facebook fa-2x" />
               <input
+                className="form-control"
                 type="text"
                 placeholder="Facebook URL"
                 name="facebook"
@@ -176,9 +182,10 @@ const ProfileForm = ({ history }) => {
               />
             </div>
 
-            <div className="form-group social-input">
+            <div className="form-group">
               <i className="fab fa-youtube fa-2x" />
               <input
+                className="form-control"
                 type="text"
                 placeholder="YouTube URL"
                 name="youtube"
@@ -187,9 +194,10 @@ const ProfileForm = ({ history }) => {
               />
             </div>
 
-            <div className="form-group social-input">
+            <div className="form-group">
               <i className="fab fa-linkedin fa-2x" />
               <input
+                className="form-control"
                 type="text"
                 placeholder="Linkedin URL"
                 name="linkedin"
@@ -198,9 +206,10 @@ const ProfileForm = ({ history }) => {
               />
             </div>
 
-            <div className="form-group social-input">
+            <div className="form-group">
               <i className="fab fa-instagram fa-2x" />
               <input
+                className="form-control"
                 type="text"
                 placeholder="Instagram URL"
                 name="instagram"
@@ -211,12 +220,18 @@ const ProfileForm = ({ history }) => {
           </>
         )}
 
-        <input type="submit" className="btn btn-primary my-1" value="Submit" />
-        <Link className="btn btn-light my-1" to="/dashboard">
+        <input type="submit" className="btn btn-light" value="Submit" />
+        <Link className="btn btn-dark" to="/dashboard">
           Go Back
         </Link>
+        <button
+          className="btn btn-danger"
+          onClick={() => dispatch(deleteAccount())}
+        >
+          Delete My Account
+        </button>
       </form>
-    </>
+    </div>
   )
 }
 

@@ -14,7 +14,7 @@ import PrivateRoute from '../routing/PrivateRoute'
 
 const Routes = (props) => {
   return (
-    <section className="container">
+    <>
       <Alert />
       <Switch>
         <Route exact path="/register" component={Register} />
@@ -28,7 +28,7 @@ const Routes = (props) => {
         <PrivateRoute exact path="/edit-profile" component={ProfileForm} />
         <Route component={NotFound} />
       </Switch>
-    </section>
+    </>
   )
 }
 

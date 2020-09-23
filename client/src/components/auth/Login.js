@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { geolocate, login } from '../../actions/auth'
-import { getProfileById } from '../../actions/profile'
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +9,7 @@ const Login = () => {
     password: ''
   })
 
-  const { isAuthenticated, user } = useSelector((state) => state.auth)
+  const { isAuthenticated } = useSelector((state) => state.auth)
 
   const dispatch = useDispatch()
 
@@ -33,14 +32,12 @@ const Login = () => {
   }
 
   return (
-    <>
-      <h1 className="large text-primary">Sign In</h1>
-      <p className="lead">
-        <i className="fas fa-user" /> Sign Into Your Account
-      </p>
-      <form className="form" onSubmit={onSubmit}>
+    <div className="card">
+      <h1 className="card-title">Sign In</h1>
+      <form className="w-400 mw-full" onSubmit={onSubmit}>
         <div className="form-group">
           <input
+            className="form-control"
             type="email"
             placeholder="Email Address"
             name="email"
@@ -51,6 +48,7 @@ const Login = () => {
         </div>
         <div className="form-group">
           <input
+            className="form-control"
             type="password"
             placeholder="Password"
             name="password"
@@ -64,7 +62,7 @@ const Login = () => {
       <p className="my-1">
         Don't have an account? <Link to="/register">Sign Up</Link>
       </p>
-    </>
+    </div>
   )
 }
 

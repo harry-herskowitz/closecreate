@@ -8,35 +8,39 @@ const ProfileItem = ({
   profile: {
     user: { _id, name },
     picture,
-    location,
-    skills
+    location
   }
 }) => {
   const dispatch = useDispatch()
   return (
-    <div className="profile bg-light">
-      {picture && <img src={`/api/get_file/${picture}`}></img>}
+    <div className="card">
+      {picture && (
+        <img
+          className="rounded"
+          src={`/api/get_file/${picture}`}
+          alt="avatar"
+        ></img>
+      )}
       <div>
-        <h2>{name}</h2>
-        <p className="my-1">{location && <span>{location}</span>}</p>
-        <Link to={`/profile/${_id}`} className="btn btn-primary">
-          View Profile
-        </Link>
-        <button
-          onClick={() => dispatch(addMatch(_id))}
-          type="button"
-          className="btn btn-light"
-        >
-          <i className="fas fa-handshake"></i>
-        </button>
+        <div className="row justify-content-center">
+          <h1 className="card-title">
+            {name.toUpperCase()},{' '}
+            {location && <span>{location.toUpperCase()}</span>}
+          </h1>
+        </div>
+        <div className="row justify-content-center">
+          <Link to={`/profile/${_id}`} className="btn btn-primary">
+            View Profile
+          </Link>
+          <button
+            onClick={() => dispatch(addMatch(_id))}
+            type="button"
+            className="btn btn-light"
+          >
+            <i className="fas fa-handshake"></i>
+          </button>
+        </div>
       </div>
-      <ul>
-        {skills.slice(0, 4).map((skill, index) => (
-          <li key={index} className="text-primary">
-            <i className="fas fa-check" /> {skill}
-          </li>
-        ))}
-      </ul>
     </div>
   )
 }

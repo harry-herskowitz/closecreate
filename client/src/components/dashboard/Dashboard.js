@@ -2,10 +2,8 @@ import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import Spinner from '../layout/Spinner'
-import ProfileTop from './ProfileTop'
-import ProfileAbout from './ProfileAbout'
-import { deleteAccount, getCurrentProfile } from '../../actions/profile'
+import ProfileInfo from './ProfileInfo'
+import { getCurrentProfile } from '../../actions/profile'
 
 const Dashboard = () => {
   const { profile } = useSelector((state) => state.profile)
@@ -17,41 +15,29 @@ const Dashboard = () => {
     if (auth.user._id) {
       dispatch(getCurrentProfile())
     }
-  }, [auth.user])
+  }, [dispatch, auth.user])
 
   return (
     <>
       {profile === null ? (
-        <>
-          <p>You have not yet setup a profile, please add some info</p>
-          <Link to="/create-profile" className="btn btn-primary my-1">
+        <div className="card">
+          <p>Welcome! Create a Profile to get started</p>
+          <Link to="/create-profile" className="btn btn-primary">
             Create Profile
           </Link>
-        </>
+        </div>
       ) : (
-        <>
-          {auth.isAuthenticated &&
-            auth.loading === false &&
-            auth.user._id === profile.user._id && (
-              <>
-                <Link to="/edit-profile" className="btn btn-dark">
-                  Edit Profile
-                </Link>
-                <div className="my-2">
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => dispatch(deleteAccount())}
-                  >
-                    <i className="fas fa-user-minus" /> Delete My Account
-                  </button>
-                </div>
-              </>
-            )}
-          <div className="profile-grid my-1">
-            <ProfileTop profile={profile} />
-            <ProfileAbout profile={profile} />
+        <div className="card">
+          <div className="card-content">
+            <ProfileInfo profile={profile} />
           </div>
-        </>
+
+          <div className="row justify-content-center">
+            <Link to="/edit-profile" className="btn btn-dark">
+              Edit Profile
+            </Link>
+          </div>
+        </div>
       )}
     </>
   )

@@ -10,20 +10,16 @@ const Landing = () => {
   }
 
   return (
-    <section className="landing">
-      <div className="dark-overlay">
-        <div className="landing-inner">
-          <h1 className="x-large">Zespo</h1>
-          <p className="lead">collab with local creators</p>
-          <div className="buttons">
-            <Link to="/register" className="btn btn-primary">
-              Sign Up
-            </Link>
-            <Link to="/login" className="btn btn-light">
-              Login
-            </Link>
-          </div>
-        </div>
+    <section className="card">
+      <h2 className="card-title">Zespo</h2>
+      <p>collab with local creators</p>
+      <div className="justify-content-center">
+        <Link to="/register" className="btn btn-primary">
+          Sign Up
+        </Link>
+        <Link to="/login" className="btn btn-light">
+          Login
+        </Link>
       </div>
     </section>
   )

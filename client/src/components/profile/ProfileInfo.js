@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const ProfileTop = ({
+const ProfileInfo = ({
   profile: {
+    bio,
     location,
     social,
     picture,
@@ -10,11 +11,21 @@ const ProfileTop = ({
   }
 }) => {
   return (
-    <div className="profile-top bg-primary p-2">
-      {picture && <img src={`/api/get_file/${picture}`}></img>}
-      <h1 className="large">{name}</h1>
-      <p>{location && <span>{location}</span>}</p>
-      <div className="icons my-1">
+    <>
+      {picture && (
+        <img
+          className="rounded"
+          src={`/api/get_file/${picture}`}
+          alt="avatar"
+        ></img>
+      )}
+      <div className="row justify-content-center">
+        <h1 className="card-title">
+          {name.toUpperCase()},{' '}
+          {location && <span>{location.toUpperCase()}</span>}
+        </h1>
+      </div>
+      <div className="row justify-content-center">
         {social && social.twitter && (
           <a href={social.twitter} target="_blank" rel="noopener noreferrer">
             <i className="fab fa-twitter fa-2x" />
@@ -41,12 +52,18 @@ const ProfileTop = ({
           </a>
         )}
       </div>
-    </div>
+      {bio && (
+        <>
+          <p>{bio}</p>
+          <div className="line" />
+        </>
+      )}
+    </>
   )
 }
 
-ProfileTop.propTypes = {
+ProfileInfo.propTypes = {
   profile: PropTypes.object.isRequired
 }
 
-export default ProfileTop
+export default ProfileInfo

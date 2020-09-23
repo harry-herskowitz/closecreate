@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Spinner from '../layout/Spinner'
 import io from 'socket.io-client'
 import { createChat, getChat } from '../../actions/chat'
 
@@ -52,32 +51,33 @@ const Chat = ({ match }) => {
   return (
     <>
       {chat === null ? (
-        <Spinner />
+        <div />
       ) : (
-        <div>
-          <div>
+        <div className="chat">
+          <ul>
             {chat.messages.map((message, index) => {
               if (message.user === user._id) {
                 return (
                   <div key={index}>
-                    <div style={{ color: 'blue' }}>{message.body}</div>
+                    <li className="chatbubble me">{message.body}</li>
                   </div>
                 )
               }
               return (
                 <div key={index}>
-                  <div>{message.body}</div>
+                  <li className="chatbubble them">{message.body}</li>
                 </div>
               )
             })}
-          </div>
+          </ul>
           <form onSubmit={sendMessage}>
             <input
+              className="form-control"
               value={message}
               onChange={handleChange}
               placeholder="Say something..."
             />
-            <button>Send</button>
+            <button className="btn btn-light float-right">Send</button>
           </form>
         </div>
       )}

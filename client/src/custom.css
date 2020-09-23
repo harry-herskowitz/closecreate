@@ -1,0 +1,72 @@
+.page-wrapper {
+  overflow: scroll !important;
+}
+.alert {
+  position: fixed !important;
+  z-index: 10000;
+  width: 100%;
+}
+.card {
+  max-width: 500px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.card-title {
+  padding-top: 15px;
+}
+nav i {
+  font-size: 20px;
+}
+img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.navbar-nav {
+  margin: auto;
+  width: 100%;
+  max-width: 600px;
+}
+nav + div {
+  margin-top: 20px !important;
+  margin-bottom: 60px !important;
+}
+.chat {
+  max-width: 500px;
+  margin: auto;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.chat ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.chatbubble {
+  display: inline-block;
+  clear: both;
+  padding: 20px;
+  margin-bottom: 2px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.them {
+  border-radius: 10px 10px 10px 0;
+  background: black;
+  float: left;
+}
+
+.me {
+  border-radius: 10px 10px 0 10px;
+  float: right;
+  background: #0084ff;
+  color: #fff;
+}
+
+.float-right {
+  float: right;
+}

@@ -5,56 +5,39 @@ import { logout } from '../../actions/auth'
 
 const Navbar = () => {
   const { isAuthenticated, loading } = useSelector((state) => state.auth)
+  const { profile } = useSelector((state) => state.profile)
 
   const dispatch = useDispatch()
 
   const authLinks = (
-    <ul>
-      <li>
-        <Link to="/profiles">
-          <i className="fab fa-connectdevelop" />{' '}
-          <span className="hide-sm">Creators</span>
+    <ul className="navbar-nav d-md-flex justify-content-around">
+      <li className="nav-item">
+        <Link className="nav-link" to="/profiles">
+          <i className="fab fa-connectdevelop" />
         </Link>
       </li>
-      <li>
-        <Link to="/matches">
-          <i className="fas fa-handshake" />{' '}
-          <span className="hide-sm">Matches</span>
+      <li className="nav-item">
+        <Link className="nav-link" to="/matches">
+          <i className="fas fa-handshake" />
         </Link>
       </li>
-      <li>
-        <Link to="/dashboard">
-          <i className="fas fa-user" /> <span className="hide-sm">Profile</span>
+      <li className="nav-item">
+        <Link className="nav-link" to="/dashboard">
+          <i className="fas fa-user" />
         </Link>
       </li>
-      <li>
-        <a onClick={() => dispatch(logout)} href="#!">
-          <i className="fas fa-sign-out-alt" />{' '}
-          <span className="hide-sm">Logout</span>
+      <li className="nav-item">
+        <a className="nav-link" onClick={() => dispatch(logout)} href="#!">
+          {' '}
+          <i className="fas fa-sign-out-alt" />
         </a>
       </li>
     </ul>
   )
 
-  const guestLinks = (
-    <ul>
-      <li>
-        <Link to="/register">Register</Link>
-      </li>
-      <li>
-        <Link to="/login">Login</Link>
-      </li>
-    </ul>
-  )
-
   return (
-    <nav className="navbar bg-dark">
-      <h1>
-        <Link to="/">
-          <i className="fas fa-lightbulb" /> Zespo
-        </Link>
-      </h1>
-      {!loading && <>{isAuthenticated ? authLinks : guestLinks}</>}
+    <nav className="navbar navbar-fixed-bottom">
+      {!loading && profile && <>{isAuthenticated && authLinks}</>}
     </nav>
   )
 }

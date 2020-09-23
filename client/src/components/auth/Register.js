@@ -41,14 +41,12 @@ const Register = () => {
   }
 
   return (
-    <>
-      <h1 className="large text-primary">Sign Up</h1>
-      <p className="lead">
-        <i className="fas fa-user" /> Create Your Account
-      </p>
-      <form className="form" onSubmit={onSubmit}>
+    <div className="card">
+      <h1 className="card-title">Sign Up</h1>
+      <form className="w-400 mw-full" onSubmit={onSubmit}>
         <div className="form-group">
           <input
+            className="form-control"
             type="text"
             placeholder="Name"
             name="name"
@@ -58,19 +56,17 @@ const Register = () => {
         </div>
         <div className="form-group">
           <input
+            className="form-control"
             type="email"
             placeholder="Email Address"
             name="email"
             value={email}
             onChange={onChange}
           />
-          <small className="form-text">
-            This site uses Gravatar so if you want a profile image, use a
-            Gravatar email
-          </small>
         </div>
         <div className="form-group">
           <input
+            className="form-control"
             type="password"
             placeholder="Password"
             name="password"
@@ -80,6 +76,7 @@ const Register = () => {
         </div>
         <div className="form-group">
           <input
+            className="form-control"
             type="password"
             placeholder="Confirm Password"
             name="password2"
@@ -92,7 +89,7 @@ const Register = () => {
       <p className="my-1">
         Already have an account? <Link to="/login">Sign In</Link>
       </p>
-    </>
+    </div>
   )
 }
 

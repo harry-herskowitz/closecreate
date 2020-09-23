@@ -2,9 +2,7 @@ import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import Spinner from '../layout/Spinner'
-import ProfileTop from './ProfileTop'
-import ProfileAbout from './ProfileAbout'
+import ProfileInfo from './ProfileInfo'
 import { getProfileById } from '../../actions/profile'
 
 const Profile = ({ match }) => {
@@ -20,12 +18,9 @@ const Profile = ({ match }) => {
   return (
     <>
       {profile === null ? (
-        <Spinner />
+        <div />
       ) : (
-        <>
-          <Link to="/profiles" className="btn btn-light">
-            Back To Profiles
-          </Link>
+        <div className="card justify-content-center">
           {auth.isAuthenticated &&
             auth.loading === false &&
             auth.user._id === profile.user._id && (
@@ -33,11 +28,11 @@ const Profile = ({ match }) => {
                 Edit Profile
               </Link>
             )}
-          <div className="profile-grid my-1">
-            <ProfileTop profile={profile} />
-            <ProfileAbout profile={profile} />
-          </div>
-        </>
+          <ProfileInfo profile={profile} />
+          <Link to="/profiles" className="btn btn-light">
+            Back To Profiles
+          </Link>
+        </div>
       )}
     </>
   )
