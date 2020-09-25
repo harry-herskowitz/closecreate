@@ -20,19 +20,17 @@ const Matches = () => {
       {loading ? (
         <div />
       ) : (
-        <>
-          <div className="profiles">
-            {user.matches.length > 0 ? (
-              profiles
-                .filter((profile) => user.matches.includes(profile.user._id))
-                .map((profile) => (
-                  <MatchItem key={profile._id} profile={profile} />
-                ))
-            ) : (
-              <h4 className="text-center">No profiles found...</h4>
-            )}
-          </div>
-        </>
+        <div>
+          {user.matches.length > 0 ? (
+            profiles
+              .filter((profile) => user.matches.includes(profile.user._id))
+              .map((profile) => (
+                <MatchItem key={profile._id} profile={profile} />
+              ))
+          ) : (
+            <h4 className="text-center">No profiles found...</h4>
+          )}
+        </div>
       )}
     </>
   )

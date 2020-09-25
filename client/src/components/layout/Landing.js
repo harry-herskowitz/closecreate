@@ -11,8 +11,8 @@ const Landing = () => {
 
   return (
     <section className="card">
-      <h2 className="card-title">Zespo</h2>
-      <p>collab with local creators</p>
+      <h2 className="card-title">Welcome to Closecreate</h2>
+      <p>Collaborate with local creators</p>
       <div className="justify-content-center">
         <Link to="/register" className="btn btn-primary">
           Sign Up

@@ -43,39 +43,37 @@ const Profiles = () => {
       {loading ? (
         <div />
       ) : (
-        <>
-          <div>
-            {profiles.filter(
-              (profile) =>
-                !user.matches.includes(profile.user._id) &&
-                !user.outgoingRequests.includes(profile.user._id) &&
-                getDistance(
-                  latitude,
-                  longitude,
-                  profile.user.latitude,
-                  profile.user.longitude
-                ) < 30
-            ).length > 0 ? (
-              profiles
-                .filter(
-                  (profile) =>
-                    !user.matches.includes(profile.user._id) &&
-                    !user.outgoingRequests.includes(profile.user._id) &&
-                    getDistance(
-                      latitude,
-                      longitude,
-                      profile.user.latitude,
-                      profile.user.longitude
-                    ) < 30
-                )
-                .map((profile) => (
-                  <ProfileItem key={profile._id} profile={profile} />
-                ))
-            ) : (
-              <h4 className="text-center">No profiles found...</h4>
-            )}
-          </div>
-        </>
+        <div>
+          {profiles.filter(
+            (profile) =>
+              !user.matches.includes(profile.user._id) &&
+              !user.outgoingRequests.includes(profile.user._id) &&
+              getDistance(
+                latitude,
+                longitude,
+                profile.user.latitude,
+                profile.user.longitude
+              ) < 30
+          ).length > 0 ? (
+            profiles
+              .filter(
+                (profile) =>
+                  !user.matches.includes(profile.user._id) &&
+                  !user.outgoingRequests.includes(profile.user._id) &&
+                  getDistance(
+                    latitude,
+                    longitude,
+                    profile.user.latitude,
+                    profile.user.longitude
+                  ) < 30
+              )
+              .map((profile) => (
+                <ProfileItem key={profile._id} profile={profile} />
+              ))
+          ) : (
+            <h4 className="text-center">No profiles found...</h4>
+          )}
+        </div>
       )}
     </>
   )

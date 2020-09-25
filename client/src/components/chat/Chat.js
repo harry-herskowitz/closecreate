@@ -78,7 +78,6 @@ const Chat = ({ match }) => {
               onChange={handleChange}
               placeholder="Say something..."
             />
-            <button className="btn btn-light float-right">Send</button>
           </form>
         </div>
       )}

@@ -18,7 +18,7 @@ const Dashboard = () => {
   }, [dispatch, user])
 
   return (
-    <>
+    <div>
       {profile === null || Object.entries(user).length === 0 ? (
         <div className="card">
           <p>Welcome! Create a Profile to get started</p>
@@ -39,7 +39,7 @@ const Dashboard = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   )
 }
 

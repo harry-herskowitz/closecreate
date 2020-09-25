@@ -21,6 +21,15 @@
 nav i {
   font-size: 20px;
 }
+.nav-brand a:hover {
+  text-decoration: none;
+}
+.dark-mode .nav-brand a {
+  color: white;
+}
+.light-mode .nav-brand a {
+  color: black;
+}
 img {
   width: 100%;
   height: 200px;
@@ -31,9 +40,13 @@ img {
   width: 100%;
   max-width: 600px;
 }
-nav + div {
-  margin-top: 50px !important;
-  margin-bottom: 60px !important;
+.content {
+  margin-top: 70px !important;
+  margin-bottom: 70px !important;
+}
+.alert {
+  position: fixed !important;
+  top: 50px !important;
 }
 .chat {
   max-width: 500px;

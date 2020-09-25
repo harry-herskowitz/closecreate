@@ -16,18 +16,20 @@ const Routes = (props) => {
   return (
     <>
       <Alert />
-      <Switch>
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/login" component={Login} />
-        <PrivateRoute exact path="/profile/:id" component={Profile} />
-        <PrivateRoute exact path="/profiles" component={Profiles} />
-        <PrivateRoute exact path="/matches" component={Matches} />
-        <PrivateRoute exact path="/chat/:id1&:id2" component={Chat} />
-        <PrivateRoute exact path="/dashboard" component={Dashboard} />
-        <PrivateRoute exact path="/create-profile" component={ProfileForm} />
-        <PrivateRoute exact path="/edit-profile" component={ProfileForm} />
-        <Route component={NotFound} />
-      </Switch>
+      <div class="content">
+        <Switch>
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+          <PrivateRoute exact path="/profile/:id" component={Profile} />
+          <PrivateRoute exact path="/profiles" component={Profiles} />
+          <PrivateRoute exact path="/matches" component={Matches} />
+          <PrivateRoute exact path="/chat/:id1&:id2" component={Chat} />
+          <PrivateRoute exact path="/dashboard" component={Dashboard} />
+          <PrivateRoute exact path="/create-profile" component={ProfileForm} />
+          <PrivateRoute exact path="/edit-profile" component={ProfileForm} />
+          <Route component={NotFound} />
+        </Switch>
+      </div>
     </>
   )
 }

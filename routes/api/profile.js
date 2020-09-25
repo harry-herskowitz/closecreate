@@ -86,7 +86,7 @@ router.post('/picture', auth, async (req, res) => {
     let profile = await Profile.findOneAndUpdate(
       { user: req.user.id },
       { picture: req.body.filename },
-      { new: true, upsert: false }
+      { new: true, upsert: true }
     )
     res.json(profile)
   } catch (err) {
