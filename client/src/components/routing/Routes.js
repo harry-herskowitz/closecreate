@@ -16,7 +16,7 @@ const Routes = (props) => {
   return (
     <>
       <Alert />
-      <div class="content">
+      <div className="content">
         <Switch>
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />

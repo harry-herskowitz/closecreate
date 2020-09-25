@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import io from 'socket.io-client'
 import { createChat, getChat } from '../../actions/chat'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import Moment from 'react-moment'
 
 const Chat = ({ match }) => {
   const dispatch = useDispatch()
@@ -55,22 +57,53 @@ const Chat = ({ match }) => {
         <div />
       ) : (
         <div className="chat">
-          <ul>
-            {chat.messages.map((message, index) => {
-              if (message.user === user._id) {
-                return (
-                  <div key={index}>
-                    <li className="chatbubble me">{message.body}</li>
-                  </div>
-                )
-              }
-              return (
-                <div key={index}>
-                  <li className="chatbubble them">{message.body}</li>
-                </div>
-              )
-            })}
-          </ul>
+          <div
+            id="scrollableDiv"
+            style={{
+              height: 'calc(100vh - 60px)',
+              overflow: 'auto',
+              display: 'flex',
+              flexDirection: 'column-reverse'
+            }}
+          >
+            {/*Put the scroll bar always on the bottom*/}
+            <InfiniteScroll
+              dataLength={chat.messages.length}
+              next={() => {}}
+              style={{ display: 'flex', flexDirection: 'column-reverse' }} //To put endMessage and loader to the top.
+              inverse={true} //
+              hasMore={false}
+              loader={<h4>Loading...</h4>}
+              scrollableTarget="scrollableDiv"
+            >
+              <ul>
+                {chat.messages.map((message, index) => {
+                  if (message.user === user._id) {
+                    return (
+                      <div key={index}>
+                        <li className="chatbubble me float-right">
+                          {message.body}
+                        </li>
+                        <li className="chatdate float-right">
+                          <Moment fromNow>{message.date}</Moment>
+                        </li>
+                      </div>
+                    )
+                  }
+                  return (
+                    <div key={index}>
+                      <li className="chatbubble them float-left">
+                        {message.body}
+                      </li>
+                      <li className="chatdate float-left">
+                        <Moment fromNow>{message.date}</Moment>
+                      </li>
+                    </div>
+                  )
+                })}
+              </ul>
+            </InfiniteScroll>
+          </div>
           <form onSubmit={sendMessage}>
             <input
               className="form-control"

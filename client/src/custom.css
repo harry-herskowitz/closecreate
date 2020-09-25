@@ -52,7 +52,7 @@ img {
   max-width: 500px;
   margin: auto;
   position: absolute;
-  bottom: 0;
+  bottom: 60px;
   right: 0;
   left: 0;
 }
@@ -74,16 +74,14 @@ img {
 .them {
   border-radius: 10px 10px 10px 0;
   background: black;
-  float: left;
 }
 
 .me {
   border-radius: 10px 10px 0 10px;
-  float: right;
   background: #0084ff;
   color: #fff;
 }
 
-.float-right {
-  float: right;
+.chatdate {
+  clear: both;
 }
