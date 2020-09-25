@@ -1,7 +1,7 @@
 {
-  "name": "zespo",
+  "name": "closecreate",
   "version": "1.0.0",
-  "description": "Social network for content creators",
+  "description": "Collab with local creators",
   "main": "server.js",
   "scripts": {
     "start": "node server",
