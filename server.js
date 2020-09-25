@@ -6,7 +6,7 @@ const connectDB = require('./config/db')
 const multer = require('multer')
 const AWS = require('aws-sdk')
 const fs = require('fs')
-const keys = require('./keys.js')
+//const keys = require('./keys.js')
 
 const app = express()
 
@@ -47,8 +47,8 @@ const upload = multer({ storage: storage })
 //The region should be the region of the bucket that you created
 //Visit this if you have any confusion - https://docs.aws.amazon.com/general/latest/gr/rande.html
 AWS.config.update({
-  accessKeyId: process.env.S3_KEY || keys.iam_access_id,
-  secretAccessKey: process.env.S3_SECRET || keys.iam_secret,
+  accessKeyId: process.env.S3_KEY /*|| keys.iam_access_id*/,
+  secretAccessKey: process.env.S3_SECRET /*|| keys.iam_secret*/,
   region: 'us-east-2'
 })
 
