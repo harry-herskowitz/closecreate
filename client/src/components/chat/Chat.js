@@ -17,11 +17,15 @@ const Chat = ({ match }) => {
   const socketRef = useRef()
 
   useEffect(() => {
+    let isMounted = true
     dispatch(getChat(match.params.id1, match.params.id2))
     socketRef.current = io.connect('/')
     socketRef.current.on('message', (message) => {
-      receivedMessage(message)
+      if (isMounted) {
+        receivedMessage(message)
+      }
     })
+    return () => (isMounted = false)
     // eslint-disable-next-line
   }, [])
 
