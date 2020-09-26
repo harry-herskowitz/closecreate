@@ -85,3 +85,6 @@ img {
 .chatdate {
   clear: both;
 }
+input {
+  font-size: 16px;
+}
