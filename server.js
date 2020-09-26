@@ -43,13 +43,16 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage: storage })
 
+const S3_BUCKET = process.env.S3_BUCKET
+const S3_REGION = process.env.S3_REGION
+
 //setting the credentials
 //The region should be the region of the bucket that you created
 //Visit this if you have any confusion - https://docs.aws.amazon.com/general/latest/gr/rande.html
 AWS.config.update({
   accessKeyId: process.env.S3_KEY /*|| keys.iam_access_id*/,
   secretAccessKey: process.env.S3_SECRET /*|| keys.iam_secret*/,
-  region: 'us-east-2'
+  region: S3_REGION
 })
 
 //Creating a new instance of S3:
@@ -73,7 +76,7 @@ function uploadFile(source, targetName, res) {
   fs.readFile(source, function (err, filedata) {
     if (!err) {
       const putParams = {
-        Bucket: 'zespo',
+        Bucket: S3_BUCKET,
         Key: targetName,
         Body: filedata
       }
@@ -98,7 +101,7 @@ function uploadFile(source, targetName, res) {
 //The retrieveFile function
 function retrieveFile(filename, res) {
   const getParams = {
-    Bucket: 'zespo',
+    Bucket: S3_BUCKET,
     Key: filename
   }
 
