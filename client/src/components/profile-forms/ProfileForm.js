@@ -106,7 +106,7 @@ const ProfileForm = ({ history }) => {
       {imageSrc && (
         <img
           className="rounded"
-          src={`https://${process.env.S3_BUCKET}.s3.${process.env.S3_REGION}.amazonaws.com/${imageSrc}`}
+          src={`/api/get_file/${imageSrc}`}
           alt="avatar"
         ></img>
       )}

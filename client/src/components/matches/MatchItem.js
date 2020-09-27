@@ -17,7 +17,7 @@ const MatchItem = ({
       {picture && (
         <img
           className="rounded"
-          src={`https://${process.env.S3_BUCKET}.s3.${process.env.S3_REGION}.amazonaws.com/${picture}`}
+          src={`/api/get_file/${picture}`}
           alt="avatar"
         ></img>
       )}
