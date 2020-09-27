@@ -15,7 +15,7 @@ const ProfileInfo = ({
       {picture && (
         <img
           className="rounded"
-          src={`/api/get_file/${picture}`}
+          src={`https://${process.env.S3_BUCKET}.s3.${process.env.S3_REGION}.amazonaws.com/${picture}`}
           alt="avatar"
         ></img>
       )}
