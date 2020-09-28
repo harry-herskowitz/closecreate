@@ -68,7 +68,7 @@ app.post('/api/post_file', upload.single('picture'), function (req, res) {
 
 //GET method route for downloading/retrieving file
 app.get('/api/get_file/:file_name', (req, res) => {
-  retrieveFile(req.params.file_name, res)
+  await retrieveFile(req.params.file_name, res)
 })
 
 //The uploadFile function
