@@ -38,10 +38,12 @@ const App = () => {
         >
           <Navbar />
           <NavbarBottom />
-          <Switch>
-            <Route exact path="/" component={Landing} />
-            <Route component={Routes} />
-          </Switch>
+          <div className="content">
+            <Switch>
+              <Route exact path="/" component={Landing} />
+              <Route component={Routes} />
+            </Switch>
+          </div>
         </div>
       </Router>
     </Provider>

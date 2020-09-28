@@ -30,8 +30,8 @@ nav i {
 .light-mode .nav-brand a {
   color: black;
 }
-btn {
-  font-size: 16px;
+.btn {
+  font-size: 16px !important;
 }
 img {
   width: 100%;
