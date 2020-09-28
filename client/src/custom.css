@@ -30,6 +30,9 @@ nav i {
 .light-mode .nav-brand a {
   color: black;
 }
+btn {
+  font-size: 16px;
+}
 img {
   width: 100%;
   height: 200px;
