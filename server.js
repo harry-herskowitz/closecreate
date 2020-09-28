@@ -43,8 +43,8 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage: storage })
 
-const S3_BUCKET = process.env.S3_BUCKET
-const S3_REGION = process.env.S3_REGION
+const S3_BUCKET = 'closecreate'
+const S3_REGION = 'us-east-2'
 
 //setting the credentials
 //The region should be the region of the bucket that you created
@@ -64,17 +64,6 @@ app.post('/api/post_file', upload.single('picture'), function (req, res) {
   //Multer middleware adds file(in case of single file ) or files(multiple files) object to the request object.
   //req.file is the demo_file
   uploadFile(req.file.path, req.file.filename, res)
-})
-
-//GET method route for downloading/retrieving file
-app.get('/api/get_file/:file_name', function (req, res) {
-  var params = { Bucket: S3_BUCKET, Key: req.params.file_name }
-  s3.getObject(params, function (err, data) {
-    if (err) {
-      return res.send({ error: err })
-    }
-    res.send(data.Body)
-  })
 })
 
 //The uploadFile function

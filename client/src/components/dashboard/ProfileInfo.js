@@ -8,7 +8,7 @@ const ProfileInfo = ({ profile: { bio, location, social, picture }, user }) => {
         <div className="d-flex justify-content-center">
           <img
             className="rounded"
-            src={`/api/get_file/${picture}`}
+            src={`https://closecreate.s3.us-east-2.amazonaws.com/${picture}`}
             alt="avatar"
           ></img>
         </div>
