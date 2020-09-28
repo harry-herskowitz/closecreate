@@ -49,6 +49,7 @@ const S3_REGION = process.env.S3_REGION
 //setting the credentials
 //The region should be the region of the bucket that you created
 //Visit this if you have any confusion - https://docs.aws.amazon.com/general/latest/gr/rande.html
+
 AWS.config.update({
   accessKeyId: process.env.S3_KEY /*|| keys.iam_access_id*/,
   secretAccessKey: process.env.S3_SECRET /*|| keys.iam_secret*/,
@@ -99,19 +100,19 @@ function uploadFile(source, targetName, res) {
 }
 
 //The retrieveFile function
-function retrieveFile(filename, res) {
-  const getParams = {
-    Bucket: S3_BUCKET,
-    Key: filename
-  }
-
-  s3.getObject(getParams, function (err, data) {
-    if (err) {
-      return res.status(400).send({ success: false, err: err })
-    } else {
-      return res.send(data.Body)
+async function retrieveFile(filename, res) {
+  try {
+    const getParams = {
+      Bucket: S3_BUCKET,
+      Key: filename
     }
-  })
+
+    const data = await s3.getObject(getParams).promise()
+
+    return data.Body
+  } catch (e) {
+    throw new Error(`Could not retrieve file from S3: ${e.message}`)
+  }
 }
 
 //Server
