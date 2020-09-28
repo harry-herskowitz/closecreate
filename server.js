@@ -109,7 +109,7 @@ function retrieveFile(filename, res) {
     if (err) {
       return res.status(400).send({ success: false, err: err })
     } else {
-      return res.send(data.Body.toString('utf-8'))
+      return res.send(data.Body)
     }
   })
 }
