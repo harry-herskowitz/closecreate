@@ -67,8 +67,14 @@ app.post('/api/post_file', upload.single('picture'), function (req, res) {
 })
 
 //GET method route for downloading/retrieving file
-app.get('/api/get_file/:file_name', async (req, res) => {
-  await retrieveFile(req.params.file_name, res)
+app.get('/api/get_file/:file_name', function (req, res) {
+  var params = { Bucket: AWS_BUCKET, Key: req.params.file_name }
+  s3.getObject(params, function (err, data) {
+    if (err) {
+      return res.send({ error: err })
+    }
+    res.send(data.Body)
+  })
 })
 
 //The uploadFile function
@@ -97,22 +103,6 @@ function uploadFile(source, targetName, res) {
       console.log({ err: err })
     }
   })
-}
-
-//The retrieveFile function
-async function retrieveFile(filename, res) {
-  try {
-    const getParams = {
-      Bucket: S3_BUCKET,
-      Key: filename
-    }
-
-    const data = await s3.getObject(getParams).promise()
-
-    return data.Body
-  } catch (e) {
-    throw new Error(`Could not retrieve file from S3: ${e.message}`)
-  }
 }
 
 //Server
