@@ -68,7 +68,7 @@ app.post('/api/post_file', upload.single('picture'), function (req, res) {
 
 //GET method route for downloading/retrieving file
 app.get('/api/get_file/:file_name', function (req, res) {
-  var params = { Bucket: AWS_BUCKET, Key: req.params.file_name }
+  var params = { Bucket: S3_BUCKET, Key: req.params.file_name }
   s3.getObject(params, function (err, data) {
     if (err) {
       return res.send({ error: err })
