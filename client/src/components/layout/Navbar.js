@@ -8,7 +8,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="nav-brand m-auto">
         <Link to="/dashboard">
-          <img className="logo" src={compass} /> Collab Compass
+          <img className="logo" src={compass} /> Closecreate
         </Link>
       </div>
     </nav>
