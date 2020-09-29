@@ -18,6 +18,11 @@ app.use(bodyParser.json({ limit: '50mb' }))
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 app.use(express.json())
 
+// set up a route to redirect http to https
+app.get('*', function (req, res) {
+  res.redirect('https://' + req.headers.host + req.url)
+})
+
 // Define Routes
 app.use('/api/users', require('./routes/api/users'))
 app.use('/api/auth', require('./routes/api/auth'))
