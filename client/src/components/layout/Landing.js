@@ -11,11 +11,11 @@ const Landing = () => {
 
   return (
     <section className="card">
-      <h2 className="card-title">Welcome Creators! 📸 </h2>
+      <h2 className="card-title">Welcome Creators! 📸 🎨 🎸</h2>
       <p>
-        Closecreate is a matchmaking 🤝 app that uses geolocation 📍 to help
-        creators find eachother and make awesome stuff 💥. Collaborate anywhere
-        in the world 🗺️, or find new creators in your own backyard 🏡.
+        Collab Compass is a matchmaking app 🤝 that uses geolocation 📍 to help
+        creators find eachother 👥 and make awesome stuff 💥. Collaborate
+        anywhere in the world 🗺️, or find new creators in your own backyard 🏡.
       </p>
       <div className="justify-content-center">
         <Link to="/register" className="btn btn-primary">

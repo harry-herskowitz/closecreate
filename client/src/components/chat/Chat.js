@@ -64,7 +64,7 @@ const Chat = ({ match }) => {
           <div
             id="scrollableDiv"
             style={{
-              height: 'calc(100vh - 60px)',
+              height: 'calc(100vh - 135px)',
               overflow: 'auto',
               display: 'flex',
               flexDirection: 'column-reverse'
