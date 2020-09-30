@@ -32,16 +32,13 @@ if (process.env.NODE_ENV === 'production') {
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
   })
-}
 
-//force https
-app.use((req, res, next) => {
-  if (process.env.NODE_ENV === 'production') {
+  //force https
+  app.use((req, res, next) => {
     if (req.headers['x-forwarded-proto'] !== 'https')
       return res.redirect('https://' + req.headers.host + req.url)
-    else return next()
-  } else return next()
-})
+  })
+}
 
 // configuring the DiscStorage engine.
 const storage = multer.diskStorage({
