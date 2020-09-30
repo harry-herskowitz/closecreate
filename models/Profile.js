@@ -18,19 +18,24 @@ const ProfileSchema = new mongoose.Schema({
   },
   social: {
     youtube: {
-      type: String
+      type: String,
+      default: 'https://youtube.com/channel/'
     },
     twitter: {
-      type: String
+      type: String,
+      default: 'https://twitter.com/'
     },
     facebook: {
-      type: String
+      type: String,
+      default: 'https://facebook.com/'
     },
     linkedin: {
-      type: String
+      type: String,
+      default: 'https://linkedin.com/in/'
     },
     instagram: {
-      type: String
+      type: String,
+      default: 'https://instagram.com/'
     }
   },
   date: {
