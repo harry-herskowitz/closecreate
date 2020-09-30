@@ -28,7 +28,7 @@ const Matches = () => {
                 <MatchItem key={profile._id} profile={profile} />
               ))
           ) : (
-            <h4 className="text-center">No profiles found...</h4>
+            <h4 className="text-center">No matches yet.</h4>
           )}
         </div>
       )}
