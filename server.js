@@ -10,6 +10,14 @@ const fs = require('fs')
 
 const app = express()
 
+//force https
+if (process.env.NODE_ENV === 'production') {
+  app.use((req, res, next) => {
+    if (req.headers['x-forwarded-proto'] !== 'https')
+      return res.redirect('https://' + req.headers.host + req.url)
+  })
+}
+
 // Connect Database
 connectDB()
 
@@ -31,12 +39,6 @@ if (process.env.NODE_ENV === 'production') {
 
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-  })
-
-  //force https
-  app.use((req, res, next) => {
-    if (req.headers['x-forwarded-proto'] !== 'https')
-      return res.redirect('https://' + req.headers.host + req.url)
   })
 }
 
