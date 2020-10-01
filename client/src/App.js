@@ -4,7 +4,6 @@ import Navbar from './components/layout/Navbar'
 import NavbarBottom from './components/layout/NavbarBottom'
 import Landing from './components/layout/Landing'
 import Routes from './components/routing/Routes'
-import AddToHomeScreen from '@ideasio/add-to-homescreen-react'
 
 // Redux
 import { Provider } from 'react-redux'
@@ -40,7 +39,6 @@ const App = () => {
           <Navbar />
           <NavbarBottom />
           <div className="content">
-            <AddToHomeScreen />
             <Switch>
               <Route exact path="/" component={Landing} />
               <Route component={Routes} />
