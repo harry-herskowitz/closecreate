@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
 import { addMatch } from '../../actions/profile'
-
-var S3_BUCKET = process.env.REACT_APP_S3_BUCKET
-var S3_REGION = process.env.REACT_APP_S3_REGION
+import { S3_BUCKET, S3_REGION } from '../../utils/s3_config'
 
 const ProfileItem = ({
   profile: {

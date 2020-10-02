@@ -11,9 +11,7 @@ import {
 } from '../../actions/profile'
 import { v1 as uuidv1 } from 'uuid'
 import Resizer from 'react-image-file-resizer'
-
-var S3_BUCKET = process.env.REACT_APP_S3_BUCKET
-var S3_REGION = process.env.REACT_APP_S3_REGION
+import { S3_BUCKET, S3_REGION } from '../../utils/s3_config'
 
 const initialState = {
   location: '',
