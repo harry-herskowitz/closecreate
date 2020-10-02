@@ -4,6 +4,9 @@ import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
 import { addMatch } from '../../actions/profile'
 
+var S3_BUCKET = process.env.REACT_APP_S3_BUCKET
+var S3_REGION = process.env.REACT_APP_S3_REGION
+
 const ProfileItem = ({
   profile: {
     user: { _id, name },
@@ -17,7 +20,7 @@ const ProfileItem = ({
       {picture && (
         <img
           className="rounded"
-          src={`https://closecreate.s3.us-east-2.amazonaws.com/${picture}`}
+          src={`https://${S3_BUCKET}.s3.${S3_REGION}.amazonaws.com/${picture}`}
           alt="avatar"
         ></img>
       )}

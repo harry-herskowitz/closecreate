@@ -1,6 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+var S3_BUCKET = process.env.REACT_APP_S3_BUCKET
+var S3_REGION = process.env.REACT_APP_S3_REGION
+
 const ProfileInfo = ({ profile: { bio, location, social, picture }, user }) => {
   return (
     <>
@@ -8,7 +11,7 @@ const ProfileInfo = ({ profile: { bio, location, social, picture }, user }) => {
         <div className="d-flex justify-content-center">
           <img
             className="rounded"
-            src={`https://closecreate.s3.us-east-2.amazonaws.com/${picture}`}
+            src={`https://${S3_BUCKET}.s3.${S3_REGION}.amazonaws.com/${picture}`}
             alt="avatar"
           ></img>
         </div>

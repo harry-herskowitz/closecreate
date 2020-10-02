@@ -37,7 +37,7 @@ const NavbarBottom = () => {
 
   return (
     <nav className="navbar navbar-fixed-bottom">
-      {!loading && profile && <>{isAuthenticated && authLinks}</>}
+      {!loading && isAuthenticated && <>{authLinks}</>}
     </nav>
   )
 }

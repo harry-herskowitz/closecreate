@@ -6,7 +6,7 @@ const connectDB = require('./config/db')
 const multer = require('multer')
 const AWS = require('aws-sdk')
 const fs = require('fs')
-//const keys = require('./keys.js')
+require('dotenv').config()
 
 const app = express()
 
@@ -52,8 +52,8 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage: storage })
 
-const S3_BUCKET = 'closecreate'
-const S3_REGION = 'us-east-2'
+const S3_BUCKET = process.env.S3_BUCKET
+const S3_REGION = process.env.S3_REGION
 
 //setting the credentials
 //The region should be the region of the bucket that you created
