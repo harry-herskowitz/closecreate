@@ -4,7 +4,7 @@
 
 # Quick Start 🚀
 
-### Add S3 and MongoDB credentials to the .env-example file and rename to .env
+### Add S3 and MongoDB credentials to the .env-example and rename to .env
 
 ```
 S3_KEY=
@@ -15,7 +15,7 @@ MONGO_URI=
 JWT_SECRET=
 ```
 
-### Add S3 Bucket info to s3_config for frontend access (Make bucket contents public)
+### Add S3 Bucket info to s3_config.js for frontend access (Make bucket contents public)
 
 ```
 module.exports = {
