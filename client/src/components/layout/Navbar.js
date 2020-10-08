@@ -8,7 +8,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="nav-brand m-auto">
         <Link to="/dashboard">
-          <img className="logo" src={logo} /> Closecreate
+          <img className="logo" src={logo} alt="logo" /> Closecreate
         </Link>
       </div>
     </nav>

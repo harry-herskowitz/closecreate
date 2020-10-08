@@ -5,7 +5,6 @@ import { logout } from '../../actions/auth'
 
 const NavbarBottom = () => {
   const { isAuthenticated, loading } = useSelector((state) => state.auth)
-  const { profile } = useSelector((state) => state.profile)
 
   const dispatch = useDispatch()
 
