@@ -108,8 +108,8 @@ router.post(
 
         res.json({ msg: 'Request sent' })
       }
-    } catch (error) {
-      console.error(error.message)
+    } catch (err) {
+      console.error(err.message)
       res.status(500).send('Server error')
     }
   }
@@ -126,8 +126,8 @@ router.post('/geolocation', [auth], async (req, res) => {
     user.longitude = req.body.longitude
     await user.save()
     res.json({ msg: 'Location Saved' })
-  } catch (error) {
-    console.error(error.message)
+  } catch (err) {
+    console.error(err.message)
     res.status(500).send('Server error')
   }
 })

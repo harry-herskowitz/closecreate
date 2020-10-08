@@ -48,8 +48,8 @@ router.get(
           res.status(500).send('Server Error')
         }
       }
-    } catch (error) {
-      console.error(error.message)
+    } catch (err) {
+      console.error(err.message)
       return res.status(500).json({ msg: 'Server error' })
     }
   }
