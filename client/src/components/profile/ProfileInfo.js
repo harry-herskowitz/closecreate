@@ -27,19 +27,9 @@ const ProfileInfo = ({
         </h1>
       </div>
       <div className="row justify-content-around social">
-        {social.twitter !== 'https://twitter.com/' && (
-          <a href={social.twitter} target="_blank" rel="noopener noreferrer">
-            <i className="fab fa-twitter fa-2x" />
-          </a>
-        )}
-        {social.facebook !== 'https://facebook.com/' && (
-          <a href={social.facebook} target="_blank" rel="noopener noreferrer">
-            <i className="fab fa-facebook fa-2x" />
-          </a>
-        )}
-        {social.linkedin !== 'https://linkedin.com/in/' && (
-          <a href={social.linkedin} target="_blank" rel="noopener noreferrer">
-            <i className="fab fa-linkedin fa-2x" />
+        {social.instagram !== 'https://instagram.com/' && (
+          <a href={social.instagram} target="_blank" rel="noopener noreferrer">
+            <i className="fab fa-instagram fa-2x" />
           </a>
         )}
         {social.youtube !== 'https://youtube.com/channel/' && (
@@ -47,9 +37,19 @@ const ProfileInfo = ({
             <i className="fab fa-youtube fa-2x" />
           </a>
         )}
-        {social.instagram !== 'https://instagram.com/' && (
-          <a href={social.instagram} target="_blank" rel="noopener noreferrer">
-            <i className="fab fa-instagram fa-2x" />
+        {social.spotify !== 'https://open.spotify.com/artist/' && (
+          <a href={social.spotify} target="_blank" rel="noopener noreferrer">
+            <i className="fab fa-spotify fa-2x"></i>
+          </a>
+        )}
+        {social.bandcamp !== 'https://bandcamp.com/' && (
+          <a href={social.bandcamp} target="_blank" rel="noopener noreferrer">
+            <i className="fab fa-bandcamp fa-2x"></i>
+          </a>
+        )}
+        {social.soundcloud !== 'https://soundcloud.com/' && (
+          <a href={social.soundcloud} target="_blank" rel="noopener noreferrer">
+            <i className="fab fa-soundcloud fa-2x"></i>
           </a>
         )}
       </div>

@@ -16,11 +16,11 @@ import { S3_BUCKET, S3_REGION } from '../../utils/s3_config'
 const initialState = {
   location: '',
   bio: '',
-  twitter: 'https://twitter.com/',
-  facebook: 'https://facebook.com/',
-  linkedin: 'https://linkedin.com/in/',
+  instagram: 'https://instagram.com/',
   youtube: 'https://youtube.com/channel/',
-  instagram: 'https://instagram.com/'
+  spotify: 'https://open.spotify.com/artist/',
+  soundcloud: 'https://soundcloud.com/',
+  bandcamp: 'https://bandcamp.com/'
 }
 
 const ProfileForm = ({ history }) => {
@@ -51,11 +51,11 @@ const ProfileForm = ({ history }) => {
   const {
     location,
     bio,
-    twitter,
-    facebook,
-    linkedin,
+    instagram,
     youtube,
-    instagram
+    spotify,
+    soundcloud,
+    bandcamp
   } = formData
 
   const onChange = (e) =>
@@ -160,29 +160,16 @@ const ProfileForm = ({ history }) => {
         {displaySocialInputs && (
           <>
             <div className="form-group">
-              <i className="fab fa-twitter fa-2x" />
+              <i className="fab fa-instagram fa-2x" />
               <input
                 className="form-control"
                 type="text"
-                placeholder="Twitter URL"
-                name="twitter"
-                value={twitter}
+                placeholder="Instagram URL"
+                name="instagram"
+                value={instagram}
                 onChange={onChange}
               />
             </div>
-
-            <div className="form-group">
-              <i className="fab fa-facebook fa-2x" />
-              <input
-                className="form-control"
-                type="text"
-                placeholder="Facebook URL"
-                name="facebook"
-                value={facebook}
-                onChange={onChange}
-              />
-            </div>
-
             <div className="form-group">
               <i className="fab fa-youtube fa-2x" />
               <input
@@ -194,27 +181,36 @@ const ProfileForm = ({ history }) => {
                 onChange={onChange}
               />
             </div>
-
             <div className="form-group">
-              <i className="fab fa-linkedin fa-2x" />
+              <i className="fab fa-spotify fa-2x" />
               <input
                 className="form-control"
                 type="text"
-                placeholder="Linkedin URL"
-                name="linkedin"
-                value={linkedin}
+                placeholder="Spotify URL"
+                name="spotify"
+                value={spotify}
                 onChange={onChange}
               />
             </div>
-
             <div className="form-group">
-              <i className="fab fa-instagram fa-2x" />
+              <i className="fab fa-bandcamp fa-2x" />
               <input
                 className="form-control"
                 type="text"
-                placeholder="Instagram URL"
-                name="instagram"
-                value={instagram}
+                placeholder="Bandcamp URL"
+                name="bandcamp"
+                value={bandcamp}
+                onChange={onChange}
+              />
+            </div>
+            <div className="form-group">
+              <i className="fab fa-soundcloud fa-2x" />
+              <input
+                className="form-control"
+                type="text"
+                placeholder="SoundCloud URL"
+                name="soundcloud"
+                value={soundcloud}
                 onChange={onChange}
               />
             </div>

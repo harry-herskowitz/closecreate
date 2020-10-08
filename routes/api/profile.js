@@ -34,11 +34,11 @@ router.post('/', auth, async (req, res) => {
   const {
     location,
     bio,
-    youtube,
-    twitter,
     instagram,
-    linkedin,
-    facebook
+    youtube,
+    spotify,
+    bandcamp,
+    soundcloud
   } = req.body
 
   const profileFields = {
@@ -48,7 +48,7 @@ router.post('/', auth, async (req, res) => {
   }
 
   // Build social object and add to profileFields
-  const socialfields = { youtube, twitter, instagram, linkedin, facebook }
+  const socialfields = { instagram, youtube, spotify, bandcamp, soundcloud }
 
   for (const [key, value] of Object.entries(socialfields)) {
     if (value && value.length > 0) {

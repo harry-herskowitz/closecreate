@@ -21,21 +21,21 @@ const ProfileSchema = new mongoose.Schema({
       type: String,
       default: 'https://youtube.com/channel/'
     },
-    twitter: {
-      type: String,
-      default: 'https://twitter.com/'
-    },
-    facebook: {
-      type: String,
-      default: 'https://facebook.com/'
-    },
-    linkedin: {
-      type: String,
-      default: 'https://linkedin.com/in/'
-    },
     instagram: {
       type: String,
       default: 'https://instagram.com/'
+    },
+    spotify: {
+      type: String,
+      default: 'https://open.spotify.com/artist/'
+    },
+    bandcamp: {
+      type: String,
+      default: 'https://bandcamp.com/'
+    },
+    soundcloud: {
+      type: String,
+      default: 'https://soundcloud.com/'
     }
   },
   date: {
