@@ -22,6 +22,10 @@
   margin: auto;
 }
 
+a {
+  outline: 0;
+}
+
 nav i {
   font-size: 20px;
 }
