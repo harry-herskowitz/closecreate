@@ -108,13 +108,16 @@ const Chat = ({ match }) => {
               </ul>
             </InfiniteScroll>
           </div>
-          <form onSubmit={sendMessage}>
+          <form className="d-flex" onSubmit={sendMessage}>
             <input
               className="form-control"
               value={message}
               onChange={handleChange}
               placeholder="Say something..."
             />
+            <button type="submit" className="send-btn">
+              <i className="fas fa-paper-plane" />
+            </button>
           </form>
         </div>
       )}

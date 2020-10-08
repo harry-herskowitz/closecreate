@@ -114,3 +114,10 @@ img.logo {
 input {
   font-size: 16px;
 }
+
+.send-btn {
+  background-color: transparent;
+  border: none;
+  color: #0084ff;
+  cursor: pointer;
+}
