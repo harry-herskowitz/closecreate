@@ -75,9 +75,9 @@ const Profiles = () => {
               <h4 className="text-center">No profiles found.</h4>
               {!user.latitude && (
                 <small className="text-center d-block">
-                  iPhone user? Make sure you have location services enabled at
-                  Settings {'>'} Privacy {'>'} Location Services {'>'} Safari
-                  Websites.
+                  Current location unavailable. iPhone user? Make sure you have
+                  location services enabled at Settings {'>'} Privacy {'>'}{' '}
+                  Location Services {'>'} Safari Websites.
                 </small>
               )}
             </>
