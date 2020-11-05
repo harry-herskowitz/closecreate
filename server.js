@@ -10,14 +10,14 @@ require('dotenv').config()
 
 const app = express()
 
-//force https
-if (process.env.NODE_ENV === 'production') {
-  app.use((req, res, next) => {
-    if (req.headers['x-forwarded-proto'] !== 'https')
-      return res.redirect('https://' + req.headers.host + req.url)
-    else next()
-  })
-}
+// //force https
+// if (process.env.NODE_ENV === 'production') {
+//   app.use((req, res, next) => {
+//     if (req.headers['x-forwarded-proto'] !== 'https')
+//       return res.redirect('https://' + req.headers.host + req.url)
+//     else next()
+//   })
+// }
 
 // Connect Database
 connectDB()
