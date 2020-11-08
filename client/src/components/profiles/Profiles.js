@@ -48,24 +48,26 @@ const Profiles = () => {
             (profile) =>
               !user.matches.includes(profile.user._id) &&
               !user.outgoingRequests.includes(profile.user._id) &&
-              getDistance(
+              (getDistance(
                 latitude,
                 longitude,
                 profile.user.latitude,
                 profile.user.longitude
-              ) < 30
+              ) < 30 ||
+                profile.user._id === '5f7f339515c8f3094e771a1b')
           ).length > 0 ? (
             profiles
               .filter(
                 (profile) =>
                   !user.matches.includes(profile.user._id) &&
                   !user.outgoingRequests.includes(profile.user._id) &&
-                  getDistance(
+                  (getDistance(
                     latitude,
                     longitude,
                     profile.user.latitude,
                     profile.user.longitude
-                  ) < 30
+                  ) < 30 ||
+                    profile.user._id === '5f7f339515c8f3094e771a1b')
               )
               .map((profile) => (
                 <ProfileItem key={profile._id} profile={profile} />

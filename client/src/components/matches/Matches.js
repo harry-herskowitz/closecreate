@@ -21,9 +21,15 @@ const Matches = () => {
         <div />
       ) : (
         <div>
-          {user.matches.length > 0 ? (
+          {user.matches.length > 0 ||
+          user.outgoingRequests.includes('5f7f339515c8f3094e771a1b') ? (
             profiles
-              .filter((profile) => user.matches.includes(profile.user._id))
+              .filter(
+                (profile) =>
+                  user.matches.includes(profile.user._id) ||
+                  (profile.user._id === '5f7f339515c8f3094e771a1b' &&
+                    user.outgoingRequests.includes('5f7f339515c8f3094e771a1b'))
+              )
               .map((profile) => (
                 <MatchItem key={profile._id} profile={profile} />
               ))
