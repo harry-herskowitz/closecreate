@@ -18,8 +18,11 @@
 }
 
 .social {
-  max-width: 200px;
   margin: auto;
+}
+
+.social i {
+  margin: 10px;
 }
 
 a {

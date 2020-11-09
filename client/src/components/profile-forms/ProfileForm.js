@@ -144,15 +144,18 @@ const ProfileForm = ({ history }) => {
             name="bio"
             value={bio}
             onChange={onChange}
+            maxLength="140"
             required
           />
-          <small className="form-text">Tell us a little about yourself</small>
+          <small className="form-text">
+            What do you do? (eg. I am a photographer, drummer, and model.)
+          </small>
         </div>
 
         <button
           onClick={() => toggleSocialInputs(!displaySocialInputs)}
           type="button"
-          className="btn btn-light"
+          className="btn btn-light mr-5 mb-5"
         >
           Add Social Network Links
         </button>
@@ -217,12 +220,12 @@ const ProfileForm = ({ history }) => {
           </>
         )}
 
-        <input type="submit" className="btn btn-light" value="Submit" />
-        <Link className="btn btn-dark" to="/dashboard">
+        <input type="submit" className="btn btn-light mr-5" value="Submit" />
+        <Link className="btn btn-dark mr-5" to="/dashboard">
           Go Back
         </Link>
         <button
-          className="btn btn-danger"
+          className="btn btn-danger mt-5"
           onClick={() => dispatch(deleteAccount())}
         >
           Delete My Account

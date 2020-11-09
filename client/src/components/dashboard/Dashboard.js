@@ -33,7 +33,7 @@ const Dashboard = () => {
           </div>
 
           <div className="row justify-content-center">
-            <Link to="/edit-profile" className="btn btn-dark">
+            <Link to="/edit-profile" className="btn btn-dark mt-10">
               Edit Profile
             </Link>
           </div>

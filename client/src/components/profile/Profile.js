@@ -24,7 +24,7 @@ const Profile = ({ match }) => {
           {auth.isAuthenticated &&
             auth.loading === false &&
             auth.user._id === profile.user._id && (
-              <Link to="/edit-profile" className="btn btn-dark">
+              <Link to="/edit-profile" className="btn btn-dark mt-10">
                 Edit Profile
               </Link>
             )}

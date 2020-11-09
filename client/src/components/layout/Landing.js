@@ -26,7 +26,7 @@ const Landing = () => {
         creators in your own backyard <Emoji symbol="🏡" label="house" />.
       </p>
       <div className="justify-content-center">
-        <Link to="/register" className="btn btn-primary">
+        <Link to="/register" className="btn btn-primary mr-10">
           Sign Up
         </Link>
         <Link to="/login" className="btn btn-light">
