@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import Emoji from '../emoji'
 import collab from '../../img/collab.png'
 
 const Landing = () => {
