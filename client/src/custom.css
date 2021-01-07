@@ -1,5 +1,6 @@
 .page-wrapper {
   overflow: scroll !important;
+  scrollbar-width: none;
 }
 
 .content {
@@ -65,6 +66,10 @@ img.logo {
   width: 14px;
   height: 14px;
   margin-bottom: -2px;
+}
+
+img.splash {
+  height: auto;
 }
 
 .alert {
